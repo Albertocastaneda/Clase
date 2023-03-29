@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="CU01056D_A.css" />
+  </head>
+  <style>
+    * {
+      font-family: arial;
+    }
+    .fondoGradient {
+      text-align: center;
+      width: 500px;
+      height: 9em;
+      line-height: 4.5em;
+      margin: 0 auto;
+      border: solid 3px;
+      background-color: #f4fa58; /*Navegadores que no aceptan el gradiente de fondo*/
+      background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#f4fa58),
+        to(#ff0000)
+      );
+      /* Chrome, Safari versiones más antiguas */
+      background-image: -webkit-linear-gradient(
+        top,
+        #f4fa58,
+        #ff0000
+      ); /* Chrome, Safari versiones relativamente modernas */
+      background-image: -moz-linear-gradient(
+        top,
+        #f4fa58,
+        #ff0000
+      ); /* Firefox versiones relativamente modernas*/
+      background-image: -o-linear-gradient(
+        top,
+        #f4fa58,
+        #ff0000
+      ); /* Opera versiones relativamente modernas*/
+      background-image: linear-gradient(
+        to bottom,
+        #f4fa58,
+        #ff0000
+      ); /* Chrome, Firefox, IE, Opera versiones actuales */
+    }
+    a {
+      display: none;
+    }
+    .b {
+      display: inline;
+      width: 100px;
+      height: 50px;
+    }
+    .c {
+      display: block;
+    }
+    .d {
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+      position: static;
+    }
+  </style>
+  <body>
+    <div class="fondoGradient"><h1>aprenderaprogramar.com</h1></div>
+    <h3>display: none</h3>
+    <p class="a">Bloque1</p>
+    <p class="a">Bloque2</p>
+    <p class="a">Bloque3</p>
+    <h3>display: inline</h3>
+    <p class="b">Bloque1</p>
+    <p class="b">Bloque2</p>
+    <p class="b">Bloque3</p>
+    <h3>display: block</h3>
+    <p class="c">Bloque1</p>
+    <p class="c">Bloque2</p>
+    <p class="c">Bloque3</p>
+    <h3>display: inline-block</h3>
+    <p class="d">Bloque1</p>
+    <p class="d">Bloque2</p>
+    <p class="d">Bloque3</p>
+  </body>
+</html>

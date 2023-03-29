@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var nombreParam = urlParams.get("nombre");
+      var DNI = urlParams.get("dni");
+      var email = urlParams.get("email");
+      var mensaje = urlParams.get("textarea");
+      document.getElementById("nombre").innerHTML =
+        "Correo recibido de " + nombreParam + " con NIF " + DNI;
+      document.getElementById("email").innerHTML = "Email " + email;
+      document.getElementById("mensaje").innerHTML = "Mensaje " + mensaje;
+    };
+  </script>
+  <body>
+    <p id="nombre"></p>
+    <br />
+    <p id="email"></p>
+    <br />
+    <p id="mensaje"></p>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+
+  </script>
+  <body>
+    <form action="RecibirDatos.html" method="get">
+      <fieldset>
+        <legend>Formulario de Contancto</legend>
+        <label>Nombre:</label>
+        <input name="nombre" type="text" placeholder="Nombre" pattern="[a-zA-Z]{1,20}" required/><br />
+        <br />
+        <label>DNI:</label>
+        <input name="dni" type="text" placeholder="DNI" pattern="[1-9]{8}[A-Z]{1}" required /> <br /><br />
+        <label>Email:</label>
+        <input name="email" type="email" placeholder="Email" required /> <br /><br />
+        <label>Mensaje:</label>
+        <textarea name="textarea" cols="50" rows="10" placeholder="Danos tu mensaje" pattern="[a-zA-Z]{1,200}"></textarea
+        ><br /><br />
+        <label>Aceptas las condiciones</label>
+        <input type="checkbox" name="condiciones" value="si" required />Si <br /><br />
+        <input type="submit" value="Enviar" />
+        <input type="reset" value="Borrar" />
+      </fieldset>
+      <form action="RecibirDatos.html" method="get">
+        <fieldset>
+          <legend>Login</legend>
+          <label>Nombre:</label>
+          <input name="nombre" type="text" placeholder="Nombre" /><br />
+          <label>Contraseña:</label>
+          <input name="contrasenia" type="text" placeholder="Contraseña" /><br />
+          <br />
+          <input type="submit" value="Enviar" />
+          <input type="reset" value="Borrar" />
+        </fieldset>
+    </form>
+  </body>
+</html>

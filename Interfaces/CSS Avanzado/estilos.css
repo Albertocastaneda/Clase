@@ -1,0 +1,199 @@
+body {
+    background-color: #f2f2f2;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.login-form {
+    width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: royalblue;
+}
+
+.tablaNoticias {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table tr:hover {
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+th,
+td {
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+td:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.conetedorVideoMapa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.video,
+.map {
+    width: 45%;
+    margin: 0px 20px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.containerDelFooter {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+body {
+    background-image: url(fondo2.jpg);
+    background-size: cover;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media (min-width: 1000px) {
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (max-width: 999px) and (min-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 10px 0;
+    }
+
+    .login-form form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .login-form label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .login-form input[type="submit"] {
+        width: 100%;
+    }
+
+    .tablaNoticias table {
+        font-size: 0.8em;
+    }
+
+    .tablaNoticias th,
+    .tablaNoticias td {
+        padding: 5px;
+    }
+
+    table tr:hover {
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in-out;
+    }
+}

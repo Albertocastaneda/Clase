@@ -1,0 +1,62 @@
+<form>
+    <!--Etiqueta fieldset-->
+    <fieldset>
+        <!--Etiqueta legend-->
+        <legend>Datos personales</legend>
+        <!--Etiqueta label-->
+        <label>Nombre y apellidos: </label>
+        <!--Etiqueta input tipo texto-->
+        <input name='nombre' type='text'/><br>
+        <label>Sexo: </label>
+        <!--Etiqueta select-->
+        <select name="select">
+            <!--Etiqueta option-->
+            <option value="value1">Hombre</option> 
+            <option value="value2" selected>Mujer</option>
+        </select><br><br>
+        <label>Edad: </label>
+        <!--Etiqueta input tipo checkbox-->
+        <input type='checkbox' name='edad' value='20-39' /> 20-39
+        <input type='checkbox' name='edad' value='40-59' /> 40-59
+        <input type='checkbox' name='edad' value='60-79' /> 60-79<br><br>
+        <label>Email: </label>
+        <!--Etiqueta input tipo email-->
+        <input name='nombre' type='email'/><br><br>
+        <label>Estudios: </label>
+        <!--Etiqueta select-->
+        <select id="dino-select">
+        <!--Etiqueta optgroup-->
+        <optgroup label="Estudios Universitarios">
+            <!--Etiqueta option-->
+            <option>Doctorado</option>
+            <option>Máster</option>
+            <option>Grado</option>
+        </optgroup>
+        <optgroup label="Ciclo Formativo">
+            <option>Grado Superior</option>
+            <option>Grado Medio</option>
+        </optgroup>
+        </select><br><br>
+        <label>Elige tu navegador favorito: </label>
+        <input list="browsers" name="myBrowser" />
+        <!--Etiqueta datalist-->
+        <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Internet Explorer">
+            <option value="Opera">
+            <option value="Safari">
+            <option value="Microsoft Edge">
+        </datalist><br><br>
+        <!--Etiqueta textarea-->
+        <textarea name="textarea" rows="10" cols="50">Escribe aquí tu mensaje</textarea>
+    </fieldset>  
+    <input type="submit" value="Enviar" />
+</form><br><br>
+
+<!--Nuevo formulario con output-->
+<form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+        <input type="range" name="b" value="50" /> +
+        <input type="number" name="a" value="10" /> =
+        <output name="result">60</output>
+</form>
