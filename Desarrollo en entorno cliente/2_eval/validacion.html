@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {};
+    function validar(params) {
+      let error = false;
+      var msg = "debes escribir algo en los campos:\n";
+      if ((formulario.elements[0].value = "")) {
+        msg += "- Jugador 1\n";
+        error = true;
+      }
+      if (formulario.elements["jugador2"].value == "") {
+        msg += "- Jugador 2\n";
+        error = true;
+      }
+      if ((formulario.jugador3.value = "")) {
+        msg += "- Jugador 3\n";
+        error = true;
+      }
+      if (error == true) {
+        params.preventDefault();
+        alert(msg);
+      } else {
+        formulario.submit();
+      }
+    }
+  </script>
+  <body>
+    <form id="formulario" name="formulario" onsubmit="validar(event)">
+      jugador 1: <input type="text" name="jugador1" id="jugador1" /><br />
+      jugador 2: <input type="text" name="jugador2" id="jugador2" /><br />
+      jugador 3: <input type="text" name="jugador3" id="jugador3" /><br />
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>

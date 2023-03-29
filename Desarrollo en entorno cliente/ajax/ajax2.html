@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="demo">
+    <h2>Mostrar resultado de AJAX</h2>
+    <button type="button" onclick="loadDoc()">Cambiar contenido</button>
+  </div>
+  <table id="informacion">
+    <tr>
+      <th id="Marca">Marca</th>
+      <th id="Modelo">Modelo</th>
+      <th id="Kilometros">Kilometros</th>
+      <th id="Precio">Precio</th>
+    </tr>
+  </table>
+        
+   <script>
+    function loadDoc() {  
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            const coches = JSON.parse(this.responseText);
+            crearTabla(coches);
+            console.log(this.responseText);
+            console.log(coches[0].marca);
+        }
+        xhttp.open("GET", "https://bbdd.lhdevsolutions.net:50500/api/coches", true);
+        xhttp.send();
+    }
+    function crearTabla(coches){
+      let tabla = document.getElementById("informacion");
+      for (let i = 0; i < coches.length; i++) {
+            let coche = coches[i];
+            let fila = document.createElement("tr");
+            let marca = document.createElement("td");
+            marca.innerHTML = coches[i].marca;
+            let modelo = document.createElement("td");
+            modelo.innerHTML = coches[i].modelo;
+            let kilometros = document.createElement("td");
+            kilometros.innerHTML = coches[i].km;
+            let precio = document.createElement("td");
+            precio.innerHTML = coches[i].precio;
+
+            fila.appendChild(marca);
+            fila.appendChild(modelo);
+            fila.appendChild(kilometros);
+            fila.appendChild(precio);
+
+            tabla.appendChild(fila);
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="formulario" action="https://bbdd.lhdevsolutions.net:50500/api/Coches" >
+        Marca: <input type="text" name="marca"><br>
+        Modelo: <input type="text" name="modelo"><br>
+        Km: <input type="number" name="km"><br>
+        Precio: <input type="number" name="precio"><br<br>
+        <input type="button" onclick="enviar()" value="Guardar">
+      </form>
+
+      <script>
+       function  enviar() {
+        const formulario= document.getElementById("formulario");
+        const formData = new FormData(formulario);
+        coche = Object.fromEntries(formData.entries())
+        coche.km = Number(coche.km);
+        coche.precio = Number(coche.precio);
+        console.log(coche);
+        const url = formulario.action;
+        enviarJson(coche,url);
+      }
+
+      function enviarJson(coche,url)
+        {
+
+
+        fetch(url, {
+        method: "POST",
+        body: JSON.stringify(coche),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then(response => response.json()) 
+        .then(json => console.log(json))
+        .catch(err => console.log(err));
+        }
+
+
+      </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      var archivosSeleccionados = document.getElementById("archivos");
+      archivosSeleccionados.addEventListener("change", (event) => {
+        var lista = event.target.files;
+        [...lista].forEach((element) => {
+          let listaDeLosArchivos = document.createElement("li");
+          listaDeLosArchivos.setAttribute("Id", "informacion");
+          document.getElementById("parrafo").appendChild(listaDeLosArchivos);
+          listaDeLosArchivos.innerHTML =
+            "Ultima modificacion " +
+            element.lastModifiedDate.toLocaleDateString() +
+            " Nombre " +
+            element.name +
+            " Tamaño " +
+            element.size;
+        });
+      });
+    };
+  </script>
+  <body>
+    <form name="formulario">
+      <input
+        type="file"
+        name="archivos"
+        id="archivos"
+        value="Elegir archivos"
+        multiple
+      />
+      <p id="parrafo"></p>
+    </form>
+  </body>
+</html>

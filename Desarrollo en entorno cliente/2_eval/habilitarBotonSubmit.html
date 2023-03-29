@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function habilitarBoton() {
+      if (formulario.nombre.value != "" && formulario.apellidos.value != "") {
+        formulario.boton.disabled = false;
+      } else {
+        formulario.boton.disabled = true;
+      }
+    }
+  </script>
+  <body>
+    <form name="formulario" onchange="habilitarBoton()">
+      Nombre <input type="text" name="nombre" required /><br />
+      Apellidos <input type="text" name="apellidos" required /><br />
+      <input type="submit" value="Enviar" name="boton" disabled />
+    </form>
+  </body>
+</html>

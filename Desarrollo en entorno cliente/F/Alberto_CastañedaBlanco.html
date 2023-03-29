@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio 2 Examen DWEC</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        label {
+            color: maroon;
+            display: block;
+            padding: 5px;
+        }
+    </style>
+</head>
+<script>
+    function colores() {
+        document.getElementsByTagName("label")[0].onmouseover = function () {
+            document.getElementsByTagName("label")[0].style.backgroundColor = "orange";
+        };
+        document.getElementsByTagName("label")[1].onmouseover = function () {
+            document.getElementsByTagName("label")[1].style.backgroundColor = "orange";
+        };
+        document.getElementsByTagName("label")[2].onmouseover = function () {
+            document.getElementsByTagName("label")[2].style.backgroundColor = "orange";
+        };
+        document.getElementsByTagName("label")[0].onmouseout = function () {
+            document.getElementsByTagName("label")[0].style.backgroundColor = "white";
+        };
+        document.getElementsByTagName("label")[1].onmouseout = function () {
+            document.getElementsByTagName("label")[1].style.backgroundColor = "white";
+        };
+        document.getElementsByTagName("label")[2].onmouseout = function () {
+            document.getElementsByTagName("label")[2].style.backgroundColor = "white";
+        };
+    }
+    function traducirLabels() {
+        let spans = document.getElementsByTagName("span")[0];
+        let spanApe = document.getElementsByTagName("span")[1];
+        let spanEmail = document.getElementsByTagName("span")[2];
+        let valorSpans = spans.innerHTML;
+        if (valorSpans == "Nombre:") {
+            spans.innerHTML = "Name:";
+            spanApe.innerHTML = "Surname:";
+            spanEmail.innerHTML = "Email:";
+        } else if (valorSpans == "Name:") {
+            spans.innerHTML = "Nombre:";
+            spanApe.innerHTML = "Apellidos:";
+            spanEmail.innerHTML = "Correo electrónico:";
+        }
+    }
+    this.onload = () => {
+        colores();
+        let boton = document.getElementsByTagName("button")[0];
+        boton.addEventListener("click", traducirLabels);
+    }
+</script>
+
+<body>
+    <div>
+        <h2>Datos de contacto</h2>
+    </div>
+    <div>
+        <form>
+            <p>Si quieres contactar con nosotros envíanos este formulario relleno:</p>
+            <label><span>Nombre:</span> <input type="text" /></label>
+            <label><span>Apellidos:</span> <input type="text" /></label>
+            <label><span>Correo electrónico:</span> <input type="text" /></label>
+        </form>
+        <div>
+            <button type="text">Traducir</button>
+        </div>
+    </div>
+</body>
+
+</html>

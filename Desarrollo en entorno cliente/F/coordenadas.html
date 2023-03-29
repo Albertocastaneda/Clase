@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<style>
+    h2 {
+        border: 1px solid red;
+        height: 10000px;
+        width: 10000px;
+    }
+</style>
+<script>
+    this.onload = () => {
+        let header = document.getElementsByTagName("h2")[0];
+
+        header.addEventListener("click", function (event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            console.log(`Coordenadas del cliente: x= ` + x + "y= " + y);
+
+            let paginaX = window.innerWidth;
+            let paginaY = window.innerHeight;
+            console.log(`Coordenadas de la página: x= ` + paginaX + "y= " + paginaY);
+            alert("Coordenadas del cliente: x= " + x + "y= " + y + "\n" +
+                "Coordenadas de la página: x= " + paginaX + "y= " + paginaY);
+        });
+    }
+</script>
+
+<body>
+    <h2>
+        Haz clic en este párrafo. Luego desplazate hacia abajo y haga clic de nuevo
+    </h2>
+</body>
+
+</html>

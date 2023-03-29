@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario</title>
+  </head>
+  <script>
+    // funcion que valida que el codigo que se introduce en el campo del C.P son los indicados
+    function validarCodigoP() {
+      var formulario = document.getElementById("formulario").elements["codigoPostal"].value; // Cogo el valor del C.P
+      var mensaje = "Codigo postal no valido"; // Mensaje del error
+      // Switch para madificar los campos en funcion del codigo introducido
+      switch (formulario) {
+        case "IFCD0110":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value ="informatica y comunicaciones";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value ="confeccion y publicacion de paginas web";
+          break;
+        case "IFCD0210":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value = "informatica y comunicaciones";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value = "desarrollo de aplicaciones con tecnologias web";
+          break;
+        case "IFCD0112":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value ="informatica y comunicaciones";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value ="programacion con lenguajes orientados a objetos y bases de datos";
+          break;
+        case "SSCB0109":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value ="Servicios a la comunidad";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value ="Dinamizacion comunitaria";
+          break;
+        case "SSCB0111":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value ="Servicios a la comunidad";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value ="Prestacion de servicios bibliotecarios";
+          break;
+        case "SSCB0110":
+          document.getElementById("familiaP").disabled = false;
+          document.getElementById("familiaP").value ="Servicios a la comunidad";
+          document.getElementById("denominacion").disabled = false;
+          document.getElementById("denominacion").value ="Desarrollo de acciones culturales";
+          break;
+      
+        default:
+          // if para que no salte todo el rato el mensaje de error ya que si se deja en blanco siempre salta
+          if (formulario == "") {
+            document.getElementById("mensajeCP").innerHTML = " ";
+          }
+          break;
+        }
+      }
+      // funcion que captura el event para validar el dni en el submit
+      function validarDNI(event) {
+      var formulario = document.getElementById("formulario"); // coger el valor del formulario
+      var letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E", "T"]; //array con las letras del dni
+      var valorDNI = document.getElementById("nif").value;
+      var numeroDelDNI = valorDNI.substring(0,8); // selecciono solo los numeros introducidos en el campo del dni
+      var letraDelDNI = valorDNI.substring(8); // selecciono la letra
+      var resultado = numeroDelDNI % 23;
+      console.log(letras[resultado]);
+      if (letras[resultado] != letraDelDNI) {
+        document.getElementById("mensajeDNI").innerHTML=" NIF incorrecto";
+        event.preventDefault(); // en caso de error no se envia el formulario
+      }
+      // formulario.submit();
+    }
+    // funcion de validacion del select para que si no se selecciona nada salte un mensaje y no se envie el formulario
+    function validarSelect(event){
+      let slect = document.getElementById("estudios").value;
+      if (slect == "seleccione") {
+        document.getElementById("mensajeSelect").innerHTML = "Selecciona una opcion";
+        event.preventDefault();
+      }
+    }
+    this.onload =()=>{
+    }
+  </script>
+  <body>
+    <fieldset style="text-align: center">
+      <legend>Seleccíon del certificado de Profesionalidad</legend>
+      <form id="formulario" onsubmit="validarDNI(event),validarSelect(event)">
+        Nombre:
+        <input type="text" name="nombre" placeholder="Nombre" required /><br />
+        Apellidos:
+        <input type="text" name="apellidos" placeholder="Apellidos" required /><br />
+        NIF:
+        <input type="text" id="nif" placeholder="NIF" pattern="[0-9]{8}[A-Z]{1}" required /><br />
+        <span id="mensajeDNI"></span><br>
+        Estudios finalizados
+        <select id="estudios">
+          <option value="seleccione">-Seleccione nivel de estudios</option>
+          <option value="sin">Sin estudios</option>
+          <option value="eso">Eso</option>
+          <option value="bachiller">Bachiller</option>
+          <option value="cfgm">CFGM</option>
+          <option value="cfgs">CFGS</option>
+          <option value="superiores">Estudios superiores</option>
+        </select><br />
+        <span id="mensajeSelect"></span><br>
+        C.P:
+        <input type="text" name="codigoPostal" placeholder="Codigo C.P" pattern="[A-Z]{4}[0-9]{4}"
+          onblur="validarCodigoP()" required/><br />
+        <span id="mensajeCP" hidden = "true">Codigo postal no valido</span><br>
+        Familia profesional:
+        <input type="text" id="familiaP" disabled="true" /><br />
+        Denominacion:
+        <input type="text" id="denominacion" disabled="true" /><br /><br />
+        <input type="submit" value="Inscribirme" />
+      </form>
+    </fieldset>
+  </body>
+</html>

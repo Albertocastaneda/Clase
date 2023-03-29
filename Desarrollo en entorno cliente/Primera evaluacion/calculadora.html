@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      document.getElementById("raiz").addEventListener("click", () => {
+        let num = prompt("inserte un numero");
+        alert(Math.sqrt(num).toFixed(2));
+      });
+      document.getElementById("PI").addEventListener("click", () => {
+        alert(Math.PI);
+      });
+      document.getElementById("Random01").addEventListener("click", () => {
+        alert(Math.random());
+      });
+      document.getElementById("Random0100").addEventListener("click", () => {
+        alert(Math.floor(Math.random() * 101));
+      });
+      document.getElementById("Random250").addEventListener("click", () => {
+        alert(Math.floor(Math.random() * 48) + 2);
+      });
+    };
+    let cadena = "Se vienen cositas";
+    const array = cadena.split(" ");
+    console.log(array.length);
+    console.log(array);
+    let contadorMayusculas = 0;
+    let contadorMinusculas = 0;
+    let cadenaM = "Se Vienen Cositas";
+    let Mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let Minusculas = "abcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i < Mayusculas.length; i++) {
+      for (let x = 0; x < cadenaM.length; x++) {
+        if (cadenaM[x] == Mayusculas[i]) {
+          contadorMayusculas++;
+        }
+      }
+    }
+    for (let i = 0; i < Minusculas.length; i++) {
+      for (let x = 0; x < cadenaM.length; x++) {
+        if (cadenaM[x] == Minusculas[i]) {
+          contadorMinusculas += 1;
+        }
+      }
+    }
+    console.log("Numero de mayusculas: " + contadorMayusculas);
+    console.log("Numero de minusculas: " + contadorMinusculas);
+    let cambio = cadenaM.replaceAll("e", "a");
+    console.log(cambio);
+    let valorMaximo = cadenaM.length;
+    let valor1 = parseInt(Math.random() * valorMaximo);
+    let valor2 = parseInt(Math.random() * valorMaximo);
+    console.log("Aleatorio1: " + valor1);
+    console.log("Aleatorio2: " + valor2);
+    let caracter1 = cadenaM.charAt(valor1);
+    let caracter2 = cadenaM.charAt(valor2);
+    console.log("Caracter1: " + caracter1);
+    console.log("Caracter2: " + caracter2);
+    cadenaM[valor1] = caracter2;
+    cadenaM[valor2] = caracter1;
+    console.log(cadenaM);
+    //caracteristicas navegador
+    console.log(navigator.appCodeName);
+    console.log(navigator.appName);
+    console.log(navigator.appVersion);
+    console.log(navigator.cookieEnabled);
+    console.log(navigator.platform);
+    console.log(navigator.userAgent);
+    //caracteristicas pantalla
+    console.log("Altura disponible " + screen.availHeight);
+    console.log("Anchura disponible " + screen.availWidth);
+    console.log("Profundidad de color " + screen.colorDepth);
+    console.log("Altura de pantalla " + screen.height);
+    console.log("Profundidad pixel " + screen.pixelDepth);
+    console.log("Anchura pantalla " + screen.width);
+  </script>
+  <body>
+    <button id="raiz">Raiz</button>
+    <button id="PI">pi</button>
+    <button id="Random01">random entre 0 y 1</button>
+    <button id="Random0100">0 100</button>
+    <button id="Random250">2 50</button>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>variable</title>
+  </head>
+  <script>
+    function suma(a, b) {
+      return a + b;
+    }
+    var c = suma(3, 4);
+    console.log("Resultado: " + c);
+    c = suma(c, 10);
+    console.log("Resultado: " + c);
+    var cadena = "hola";
+    var cadena2 = new String("hola");
+    if (cadena == cadena2) {
+      console.log("cadena == cadena2");
+    } else {
+      console.log("cadena != cadena2");
+    }
+
+    if (cadena === cadena2) {
+      console.log("cadena === cadena2");
+    } else {
+      console.log("cadena !== cadena2");
+    }
+
+    var perro = new Object();
+    perro.raza = "Podenco";
+    perro.peso = 12;
+    perro.altura = 58;
+    perro.color = "negro";
+    perro.vacunado = true;
+
+    console.log("perro: " + perro);
+    console.log("perro: " + perro.raza);
+    console.log("perro: " + JSON.stringify(perro));
+
+    var perro2 = {
+      raza: "Podenco",
+      peso: 12,
+      altura: 58,
+      color: "negro",
+      vacunado: true,
+    };
+
+    console.log("perro: " + perro2);
+    console.log("perro: " + perro2.raza);
+    console.log("perro: " + perro2["raza"]);
+    console.log("perro: " + JSON.stringify(perro2));
+
+    var persona = new Object();
+    persona.nombre = "Tizziano";
+    persona.apellidos = "Cositas";
+    persona.edad = 19;
+    persona.peso = 90;
+    persona.VacunaCovid = true;
+
+    var persona2 = {
+      nombre: "Tizziano",
+      apellidos: "Patron",
+      edad: 19,
+      peso: 90,
+      VacunaCovid: false,
+    };
+    console.log(
+      "El paciente " +
+        persona2.nombre +
+        " " +
+        persona2.apellidos +
+        " de " +
+        persona2.edad +
+        " años y pesa " +
+        persona2.peso +
+        " kilogramos ha sido vacunado contra el covid " +
+        persona2.VacunaCovid
+    );
+    function vacunado(persona) {
+      return persona.VacunaCovid + "ha sido vacunado contra el covid";
+    }
+
+    function descripcion() {
+      return;
+      "El paciente " +
+        persona.nombre +
+        " " +
+        persona.apellidos +
+        " de " +
+        persona.edad +
+        " años y pesa " +
+        persona.peso +
+        " kilogramos ha sido vacunado contra el covid " +
+        persona.VacunaCovid;
+    }
+    window.alert(descripcion());
+  </script>
+  <body></body>
+</html>

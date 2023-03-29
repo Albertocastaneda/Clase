@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  let unObjeto={
+  "marca": "Ford",
+  "modelo": "Mondeo",
+  "km": 10,
+  "precio": 10
+};
+  $("button").click(function(){
+    //console.log(JSON.stringify(unObjeto));
+    $.get("https://bbdd.lhdevsolutions.net:50500/api/Coches/1", function(data, status){
+      let marca = data.marca;
+      console.log("Data: " + marca + "\nStatus: " + status);
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>

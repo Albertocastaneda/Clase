@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function enviar() {
+      if (boletin.alta.checked == true && boletin.baja.checked == true) {
+        alert("Por favor, marca una sola casilla");
+        return true;
+      }
+      if (boletin.alta.checked == false && boletin.baja.checked == false) {
+        alert("Debes indicar si deseas darte de alta o baja");
+        return true;
+      }
+      if (boletin.alta.checked == true) {
+        boletin.action = "ejemplo/alta.asp";
+      }
+      if (boletin.baja.checked == true) {
+        boletin.action = "ejemplo/baja.asp";
+      }
+      form.submit();
+    }
+    function cambiarTarget() {
+      if (form2.blank.checked == true) {
+        form2.target = "_blank";
+      }
+      if (form2.self.checked == true) {
+        form2.target = "_self";
+      }
+      form2.submit();
+    }
+  </script>
+  <body>
+    <form action="" method="get" name="boletin">
+      alta <input type="checkbox" name="alta" value="ON" /><br />
+      baja <input type="checkbox" name="baja" value="ON" /><br />
+      <input type="button" onclick="enviar()" value="Enviar" />
+    </form>
+    <form action="" method="get" name="form2">
+      blank <input type="checkbox" name="blank" value="ON" /> <br />
+      self <input type="checkbox" name="self" value="ON" /><br />
+      <input type="button" value="Enviar" onclick="cambiarTarget()" />
+    </form>
+  </body>
+</html>

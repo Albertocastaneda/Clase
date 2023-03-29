@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<script>
+    function listarCoches() {   
+        fetch('https://bbdd.lhdevsolutions.net:50500/api/Coches')
+            .then(response => response.json())
+            .then(data => {
+                let lista = document.createElement('ul');
+                lista.setAttribute("class","list-group");
+                data.forEach(coche => {
+                    let item = document.createElement('li');
+                    item.setAttribute("class","list-group-item")
+                    item.textContent = `${coche.id} - ${coche.marca} - ${coche.modelo} - ${coche.km} - ${coche.precio}`;
+                    lista.appendChild(item);
+                });
+                let formBorrarCoche = document.createElement('form');
+                let labelId = document.createElement("label");
+                labelId.setAttribute("for","id");
+                labelId.setAttribute("class","form-label");
+                labelId.textContent = "Id Del Coche a Eliminar:";
+
+                let inputId = document.createElement('input');
+                inputId.setAttribute('type', 'text');
+                inputId.setAttribute('name', 'id');
+                inputId.setAttribute("class","form-control");
+
+                let botonEliminar = document.createElement('button');
+                botonEliminar.setAttribute("class","btn btn-primary");
+                botonEliminar.textContent = 'Eliminar Coche Por ID';
+                
+                formBorrarCoche.appendChild(labelId);
+                formBorrarCoche.appendChild(inputId);
+                formBorrarCoche.appendChild(botonEliminar);
+
+                let resultado = document.getElementById('resultado');
+                resultado.innerHTML = '';
+                resultado.appendChild(lista);
+                resultado.appendChild(formBorrarCoche);
+
+                formBorrarCoche.addEventListener('submit', event => {
+                    event.preventDefault();
+                    let id = inputId.value;
+                    let coche = data.find(c => c.id === id);
+                    if (coche) {
+                        eliminarCoche(coche.id);
+                    } else {
+                        alert(`No se encontró ningun coche con ID ${id}`);
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    }
+    function eliminarCoche(id) {
+        fetch(`https://bbdd.lhdevsolutions.net:50500/api/Coches/${id}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                listarCoches();
+            })
+            .catch(error => console.error(error));
+    }
+    this.onload = () => {
+        let ListarCoches = document.querySelector('#botonListarCoches');
+        ListarCoches.addEventListener('click', listarCoches);
+    }
+</script>
+<body>
+    <button id="botonListarCoches" class="btn btn-primary">Listar coches</button><br><br>
+    <div class="container" id="resultado"></div>
+</body>
+</html>

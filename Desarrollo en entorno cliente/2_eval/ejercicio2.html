@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function palabras(event) {
+      if (
+        event.key == " " &&
+        formulario.mensaje.value.charAt(formulario.mensaje.value.length - 2)
+      ) {
+        formulario.mensaje.value = formulario.mensaje.value.substring(
+          0,
+          formulario.mensaje.value.length - 1
+        );
+      } else {
+        texto = formulario.mensaje.value;
+        texto = texto.split(" ");
+        formulario.palabras.value = texto.length - 1;
+      }
+    }
+  </script>
+  <body>
+    <form name="formulario">
+      Introducir mensaje:
+      <input type="text" name="mensaje" onkeyup="palabra(event)" /><br />
+      Numero de palabras:
+      <input type="text" name="palabras" value="0" /><br />
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .botonesGrandes {
+        height: 50px;
+      }
+
+      #zonaResultados {
+        border: solid 1px lightslategrey;
+        text-align: center;
+      }
+    </style>
+    <title>Conversiones</title>
+  </head>
+
+  <body style="width: 400px">
+    <h3>Invetir</h3>
+    <button id="botoninvertir" onclick="invertir()">
+      Invertir conversiones
+    </button>
+
+    <button>Ultima operación</button>
+    <button>Limpiar</button>
+
+    <h3>Calcular edad</h3>
+    <button onclick="calcularEdad()">Calcular</button>
+
+    <h3 id="CelsisusaFahrenheit">Convertir Celsius a Fahrenheit</h3>
+
+    <button onclick="deCelsiusaFarenheit()">Convertir</button>
+
+    <h3 id="NudosKm">Convertir Nudos a Km/h</h3>
+    <button onclick="deNudosaKm()">Convertir</button>
+
+    <h3 id="EurosaDolares">Convertir Euros a Dolares</h3>
+    <button onclick="deEurosaDolares()">Convertir</button>
+
+    <h3 id="KmaMillas">Convertir Km a Millas</h3>
+    <button onclick="deKmaMillas()">Convertir</button>
+
+    <h3 id="KmHaMH">Convertir Velocidad en Km/h a Millas/Hora</h3>
+    <button onclick="deKmxHaMillasxH()">Convertir</button>
+
+    <p id="dy">Dolares a Yenes</p>
+    <button onclick="dolaresYenes()">Convertir</button>
+
+    <br /><br />
+
+    <div
+      id="zonaResultados"
+      style="border: solid 1px lightslategrey; text-align: center"
+    >
+      <p id="resultado">Esperando la operación ...</p>
+    </div>
+  </body>
+
+  <script>
+    var Conversiones = new Object();
+    var Conversiones = {
+      numeroOperacionesRealizadas: "",
+      UltimaOperacionRealizada: 0,
+      ValorUltimaOperacion: 0,
+    };
+
+    function calcularEdad() {
+      var nacimiento = window.prompt("Dime tu año de nacimiento");
+      console.log(
+        "El usuario ha indtroducido su año de nacimiento" +
+          nacimiento +
+          "año de nacimiento"
+      );
+      var actual = window.prompt("Dime el año actual");
+      console.log(
+        "El usuario ha introducido el año actual" + actual + "Año acual"
+      );
+      var total = parseInt(actual) - parseInt(nacimiento);
+      console.log("Los años que tiene el usuario son: " + total + " Años");
+      document.getElementById("zonaResultados").innerHTML = total + " Años";
+    }
+
+    function deCelsiusaFarenheit() {
+      // ºF = ºC x 1.8 + 32
+      console.log("invertido: " + invertido);
+      if (invertido) {
+        var celsius = prompt("Introduce los grados celsius");
+        console.log("El usuario introdujo " + celsius + " grados Celsius");
+        var fahrenheit = parseFloat(celsius * 1.8 + 32).toFixed(2);
+        console.log(
+          "La conversion de Celsius a Farenheit da un total de " +
+            fahrenheit +
+            " grados Farenheit"
+        );
+        var dvGrados = document.getElementById("zonaResultados");
+        dvGrados.innerHTML = fahrenheit + "Fº";
+
+        if (celsius < 5) {
+          console.log("Los grados celsius son menores que 5");
+          dvGrados.style.color = "white";
+          dvGrados.style.backgroundColor = "blue";
+        } else if (celsius > 40) {
+          console.log("Los grados celsius son mayores que 40");
+          dvGrados.style.color = "white";
+          dvGrados.style.backgroundColor = "red";
+        }
+      } else {
+        var Farenheit = prompt("Introduce los grados farenheit");
+        console.log("El usuario introdujo " + Farenheit + " grados farenheit");
+        var variable = parseFloat((Farenheit * 5) / 9 - 32).toFixed(2);
+        console.log(
+          "La conversion de Celsius a Farenheit da un total de " +
+            variable +
+            " grados Celsius"
+        );
+        var dvGrados = document.getElementById("zonaResultados");
+        dvGrados.innerHTML = variable + "Cº";
+      }
+    }
+    function dolaresYenes() {
+      console.log("invertido: " + invertido);
+      if (!invertido) {
+        var dolares = window.prompt("Introduce la cantidad de dolares");
+        console.log("El usuario introdujo " + dolares + " dolares");
+        var yenes = parseFloat(dolares * 146.85).toFixed(2);
+        console.log(
+          "La conversion de Dolares a Yenes da un total de " + yenes + " yenes"
+        );
+        var dvGrados = document.getElementById("zonaResultados");
+        dvGrados.innerHTML = yenes + "yenes";
+      } else {
+        var yenesI = window.prompt("Introduce la cantidad de yenes");
+        console.log("El usuario introdujo " + yenesI + " yenes");
+        var dolaresI = parseFloat(yenesI / 146.85).toFixed(2);
+        console.log(
+          "La conversion de Yenes a Dolares da un total de " +
+            dolaresI +
+            " dolares"
+        );
+        var dvGrados = document.getElementById("zonaResultados");
+        dvGrados.innerHTML = dolaresI + "dolares";
+      }
+    }
+
+    function deNudosaKm() {
+      // nudos x 1.85
+      var nudos;
+      var km;
+      nudos = prompt("Introduce los nudos");
+      console.log("El usuario introdujo " + nudos + " nudos");
+      km = parseFloat(nudos * 1.88).toFixed(2);
+      console.log(
+        "La conversion de nudos a km/h da un total de " +
+          km +
+          " kilometros hora"
+      );
+      document.getElementById("zonaResultados").innerHTML =
+        km + " Kilometros/hora";
+      if (nudos >= 120) {
+        document.getElementById("zonaResultados").style.color = "red";
+        document.getElementById("zonaResultados").style.fontSize = "34px";
+        document.getElementById("zonaResultados").style.fontWeight = "bold";
+      } else {
+        document.getElementById("zonaResultados").style.color = "green";
+        document.getElementById("zonaResultados").style.fontSize = "medium";
+        document.getElementById("zonaResultados").style.fontWeight = "normal";
+      }
+    }
+
+    function deEurosaDolares() {
+      var euros = prompt("Introduce los euros");
+      console.log("El usuario ha introducido " + euros + " euros");
+      var dolares = parseFloat(euros * 0.99).toFixed(2);
+      console.log(
+        "La conversion de euros a dolares da un total de " +
+          dolares +
+          " dolares"
+      );
+      document.getElementById("zonaResultados").innerHTML =
+        dolares + " Dolares";
+    }
+
+    function deKmaMillas() {
+      var km = prompt("Introduce los Kilometros");
+      console.log("El usuario ha introducido " + km + " kilometros");
+      var millas = parseFloat(km / 1.609).toFixed(2);
+      console.log(
+        "La conversion de kilometro a millas da un total de " +
+          millas +
+          " millas"
+      );
+      document.getElementById("zonaResultados").innerHTML = millas + " Millas";
+    }
+
+    function deKmxHaMillasxH() {
+      var kph = prompt("Introduce los Kilometros/Hora");
+      console.log("El usuario ha introducido " + kph + " Kilometros/Hora");
+      var mph = parseFloat(kph * 0.62).toFixed(2);
+      console.log(
+        "La conversion de kilometro por hora a millas por hora da un total de " +
+          mph +
+          " Millas/Hora"
+      );
+      document.getElementById("zonaResultados").innerHTML =
+        mph + " Millas/Hora";
+    }
+
+    var invertido = false;
+    // Funcion que invierte el valor de la variable invertido y cambia todos los textos de los parrafos
+    function invertir() {
+      if (invertido == false) {
+        invertido = true;
+        document.getElementById("CelsisusaFahrenheit").innerHTML =
+          "Convertir Celsisus a Fahrenheit";
+        document.getElementById("NudosKm").innerHTML = "Convertir nudos a Km";
+        document.getElementById("EurosaDolares").innerHTML =
+          "Convertir euros a Km";
+        document.getElementById("KmaMillas").innerHTML =
+          "Convertir Km a Millas";
+        document.getElementById("KmHaMH").innerHTML =
+          "Convertir Km/h a Millas/h";
+        document.getElementById("dy").innerHTML = "Dolares a Yenes";
+        // console.log(document.getElementById("DolaresYenes"));
+      } else if (invertido == true) {
+        invertido = false;
+        document.getElementById("CelsisusaFahrenheit").innerHTML =
+          "Convertir Farenheit a Celsius";
+        document.getElementById("NudosKm").innerHTML = "Convertir km a nudos";
+        document.getElementById("EurosaDolares").innerHTML =
+          "Convertir dolares a euros";
+        document.getElementById("KmaMillas").innerHTML =
+          "Convertir millas a km";
+        document.getElementById("KmHaMH").innerHTML =
+          "Convertir Millas/h a Km/h";
+        document.getElementById("dy").innerHTML = "Yenes a Dolares";
+      }
+    }
+
+    function actualizarConversiones(ultOp, valorUltOp) {
+      this.Conversiones.UltimaOperacionRealizada = ultOp;
+      this.Conversiones.ValorUltimaOperacion = ultOp;
+      this.Conversiones.numeroOperacionesRealizadas++;
+    }
+    // Añadir botones ulima op y limpiar
+    // una funcion para asinar estilo
+    function AsignarEstilo(color, background, height) {}
+  </script>
+</html>
+<!-- En la eda no modificar a la inversa -->

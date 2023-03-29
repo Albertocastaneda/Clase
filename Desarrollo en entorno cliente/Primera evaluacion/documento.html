@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function cambiar() {
+      var imagen = document.getElementById("imagen");
+      if (imagen.src.match("rojo")) {
+        imagen.src = "verde.png";
+        h2.style.color = "green";
+        h2.style.fontSize = "xx-large";
+      } else {
+        imagen.src = "rojo.jpg";
+        h2.style.color = "red";
+      }
+    }
+  </script>
+  <body>
+    <h1 id="h1">hola mundo</h1>
+    <button
+      id="boton"
+      onclick="document.getElementById('h1').innerHTML = 'adios mundo'; document.getElementById('boton').remove()"
+    >
+      Pulsame
+    </button>
+
+    <h2 id="h2">cambiar imagen con javascript</h2>
+    <img
+      id="imagen"
+      onmouseover="cambiar()"
+      onmouseout="cambiar()"
+      src="rojo.jpg"
+      width="50px"
+      height="50px"
+    />
+  </body>
+</html>

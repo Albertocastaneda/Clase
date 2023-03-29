@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 1</title>
+  </head>
+  <script>
+    function preguntasVerdaderas(pregunta, respuesta, imagen) {
+      var enunciado = document.getElementById(pregunta);
+      if (respuesta == true) {
+        pregunta.style.color = "green";
+        document.getElementById(imagen).src = "check.jpg";
+      } else {
+        pregunta.style.color = "red";
+        imagen.src = "incorrecto.png";
+        document.getElementById(imagen).src = "incorrecto.png";
+      }
+    }
+  </script>
+  <body>
+    <h2 id="p1">1- Mi nombre es Alberto</h2>
+    <button
+      id="correcta1"
+      pregunta="p1"
+      onclick="preguntasVerdaderas(p1, true, 'imagen')"
+    >
+      Verdadero
+    </button>
+    <button
+      id="correcta1"
+      pregunta="p1"
+      onclick="preguntasVerdaderas(p1, false, 'imagen')"
+    >
+      Falso
+    </button>
+    <img id="imagen" src="" width="25px" height="25px" />
+    <h2 id="p2">2- Soy alumno de DAM</h2>
+    <button pregunta="p2" onclick="preguntasVerdaderas(p2, false, 'imagen2')">
+      Verdadero
+    </button>
+    <button
+      id="correcta2"
+      pregunta="p2"
+      onclick="preguntasVerdaderas(p2, true, 'imagen2')"
+    >
+      Falso
+    </button>
+    <img id="imagen2" src="" width="25px" height="25px" />
+    <h2 id="p3">3- Estoy en segundo curso</h2>
+    <button
+      id="correcta3"
+      pregunta="p3"
+      onclick="preguntasVerdaderas(p3, true, 'imagen3')"
+    >
+      Verdadero
+    </button>
+    <button pregunta="p3" onclick="preguntasVerdaderas(p3, false, 'imagen3')">
+      Falso
+    </button>
+    <img id="imagen3" src="" width="25px" height="25px" />
+    <h2 id="p4">4- Tengo 20 años</h2>
+    <button pregunta="p4" onclick="preguntasVerdaderas(p4, false, 'imagen4')">
+      Verdadero
+    </button>
+    <button
+      id="correcta4"
+      pregunta="p4"
+      onclick="preguntasVerdaderas(p4, true, 'imagen4')"
+    >
+      Falso
+    </button>
+    <img id="imagen4" src="" width="25px" height="25px" />
+    <h2 id="p5">5- Tengo un hermano y una hermana</h2>
+    <button
+      id="correcta5"
+      pregunta="p5"
+      onclick="preguntasVerdaderas(p5, true, 'imagen5')"
+    >
+      Verdadero
+    </button>
+    <button pregunta="p5" onclick="preguntasVerdaderas(p5, false, 'imagen5')">
+      Falso
+    </button>
+    <img id="imagen5" src="" width="25px" height="25px" />
+    <h2 id="p6">6- No tengo mascota</h2>
+    <button pregunta="p6" onclick="preguntasVerdaderas(p6, false, 'imagen6')">
+      Verdadero
+    </button>
+    <button
+      id="correcta6"
+      pregunta="p6"
+      onclick="preguntasVerdaderas(p6, true, 'imagen6')"
+    >
+      Falso
+    </button>
+    <img id="imagen6" src="" width="25px" height="25px" />
+    <h2 id="p7">7- Hice bachiller en el colegio Auseva</h2>
+    <button
+      id="correcta7"
+      pregunta="p7"
+      onclick="preguntasVerdaderas(p7, true, 'imagen7')"
+    >
+      Verdadero
+    </button>
+    <button pregunta="p7" onclick="preguntasVerdaderas(p7, false, 'imagen7')">
+      Falso
+    </button>
+    <img id="imagen7" src="" width="25px" height="25px" />
+    <h2 id="p8">8- Vivo fuera de oviedo</h2>
+    <button pregunta="p8" onclick="preguntasVerdaderas(p8, false, 'imagen8')">
+      Verdadero
+    </button>
+    <button
+      id="correcta8"
+      pregunta="p8"
+      onclick="preguntasVerdaderas(p8, true, 'imagen8')"
+    >
+      Falso
+    </button>
+    <img id="imagen8" src="" width="25px" height="25px" />
+    <h2 id="p9">9- No he echo ninguna carrera universitaria</h2>
+    <button
+      id="correcta9"
+      pregunta="p9"
+      onclick="preguntasVerdaderas(p9, true, 'imagen9')"
+    >
+      Verdadero
+    </button>
+    <button pregunta="p9" onclick="preguntasVerdaderas(p9, false, 'imagen9')">
+      Falso
+    </button>
+    <img id="imagen9" src="" width="25px" height="25px" />
+    <h2 id="p10">10- No juego videojuegos</h2>
+    <button
+      pregunta="p10"
+      onclick="preguntasVerdaderas(p10, false, 'imagen10')"
+    >
+      Verdadero
+    </button>
+    <button
+      id="correcta10"
+      pregunta="p10"
+      onclick="preguntasVerdaderas(p10, true, 'imagen10')"
+    >
+      Falso
+    </button>
+    <img id="imagen10" src="" width="25px" height="25px" />
+  </body>
+</html>

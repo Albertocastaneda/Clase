@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript Fetch API</h1>
+<h2>The fetch() Method</h2>
+<p id="demo">Fetch a file to change this text.</p>
+
+<script>
+
+let texto ;
+let accessPoint = "https://bbdd.lhdevsolutions.net:50500/api/Coches"
+
+
+let coche = {
+  marca: "Toyota",
+  modelo: "Celica2", 
+  km: 10000,
+  pecio:15000
+}
+enviar(coche,accessPoint);
+
+function enviar(coche,url)
+{
+
+
+fetch(url, {
+  method: "POST",
+  body: JSON.stringify(coche),
+  headers: {"Content-type": "application/json; charset=UTF-8"}
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+.catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>

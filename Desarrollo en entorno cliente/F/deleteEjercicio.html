@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function listarPersonas() {
+        fetch('https://bbdd.lhdevsolutions.net:50500/api/personas')
+            .then(response => response.json())
+            .then(data => {
+                let lista = document.createElement('ul');
+
+                data.forEach(persona => {
+                    let item = document.createElement('li');
+                    item.textContent = `${persona.dni} - ${persona.nyap}`;
+                    lista.appendChild(item);
+                });
+
+                let formEliminar = document.createElement('form');
+                let inputDni = document.createElement('input');
+                inputDni.setAttribute('type', 'text');
+                inputDni.setAttribute('name', 'dni');
+                let botonEliminar = document.createElement('button');
+                botonEliminar.textContent = 'Eliminar Persona Por DNI';
+
+                formEliminar.appendChild(inputDni);
+                formEliminar.appendChild(botonEliminar);
+
+                let resultado = document.getElementById('resultado');
+                resultado.innerHTML = '';
+                resultado.appendChild(lista);
+                resultado.appendChild(formEliminar);
+
+                formEliminar.addEventListener('submit', event => {
+                    event.preventDefault();
+                    let dni = inputDni.value;
+                    let persona = data.find(p => p.dni === dni);
+                    if (persona) {
+                        eliminarPersona(persona.dni);
+                    } else {
+                        alert(`No se encontró ninguna persona con DNI ${dni}`);
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    function eliminarPersona(dni) {
+        fetch(`https://bbdd.lhdevsolutions.net:50500/api/personas/${dni}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                alert('Persona eliminada.');
+                listarPersonas();
+            })
+            .catch(error => console.error(error));
+    }
+    this.onload = () => {
+        let btnListarPersonas = document.querySelector('#botonListarPersonas');
+        btnListarPersonas.addEventListener('click', listarPersonas);
+    }
+</script>
+
+<body>
+    <button id="botonListarPersonas">Listar Personas</button>
+    <div id="resultado"></div>
+</body>
+
+</html>

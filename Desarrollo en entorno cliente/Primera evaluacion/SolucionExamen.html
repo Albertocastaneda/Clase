@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFA Memory</title>
+</head>
+<style>
+    #numeros {
+        background-color: #e3e3e3;
+        font-size: 50px;
+    }
+
+    body {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    div {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 20px;
+    }
+</style>
+<script>
+
+    let arrayAleatorios = [];
+    let arrayAleatoriosJugador = [];
+    let numeroAleatorios = 3;
+
+    let numerosTexto = "";
+    let numerosTextoJugador = "";
+
+    let intervalo;
+
+    class Cifra {
+        constructor() {
+            this.numero = Math.floor(Math.random() * 10);
+            this.puntuacion = Math.floor(Math.random() * 10);
+        }
+    }
+
+    function ClicksBotones() {
+        document.getElementById("0").addEventListener("click", () => {
+
+            numerosTextoJugador += "0" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 0;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("1").addEventListener("click", () => {
+            numerosTextoJugador += "1" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 1;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("2").addEventListener("click", () => {
+            numerosTextoJugador += "2" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 2;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("3").addEventListener("click", () => {
+            numerosTextoJugador += "3" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 3;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("4").addEventListener("click", () => {
+            numerosTextoJugador += "4" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 4;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("5").addEventListener("click", () => {
+            numerosTextoJugador += "5" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 5;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("6").addEventListener("click", () => {
+            numerosTextoJugador += "6" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 6;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("7").addEventListener("click", () => {
+            numerosTextoJugador += "7" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 7;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("8").addEventListener("click", () => {
+            numerosTextoJugador += "8" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 8;
+            arrayAleatoriosJugador.push(c);
+        });
+        document.getElementById("9").addEventListener("click", () => {
+            numerosTextoJugador += "9" + " ";
+            document.getElementById("numerosSeleccionados").innerHTML = numerosTextoJugador;
+            let c = new Cifra();
+            c.numero = 9;
+            arrayAleatoriosJugador.push(c);
+        });
+    }
+
+    function GenerarArrayAleatorios() {
+
+        for (let index = 0; index < numeroAleatorios; index++) {
+            let cifra = new Cifra();
+            arrayAleatorios.push(cifra);
+            numerosTexto += cifra.numero + " ";
+        }
+    }
+
+    function ComparaArrays(arrayAleatorio, arrayUsuario) {
+        for (let index = 0; index < arrayAleatorio.length; index++) {
+            if (arrayAleatorio[index].numero != arrayUsuario[index].numero) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function EstadoBotones(param) {
+        const buttons = document.getElementsByTagName("button");
+        for (const b of buttons) {
+            b.disabled = param;
+        }
+    }
+
+    function GenerarCombinacion() {
+        GenerarArrayAleatorios();
+        document.getElementById("numeros").innerHTML = numerosTexto;
+    }
+
+    function Limpiar() {
+        arrayAleatorios = [];
+        arrayAleatoriosJugador = [];
+        numerosTexto = "";
+        numerosTextoJugador = "";
+        document.getElementById("numerosSeleccionados").innerHTML = "";
+        document.getElementById("numeros").style.visibility = "visible";
+    }
+
+    function Jugar() {
+
+        Limpiar();
+        GenerarCombinacion();
+        EstadoBotones(true);
+
+        setTimeout(() => {
+
+            document.getElementById("numeros").style.visibility = "hidden";
+            EstadoBotones(false);
+
+            let tiempo = 6;
+
+            intervalo = setInterval(() => {
+                tiempo = tiempo - 1;
+                document.getElementById("tiempo").innerHTML = tiempo + " segundos";
+
+                if (tiempo == 0) {
+                    // parar el intertal
+                    alert("HAS PERDIDO");
+                    clearInterval(intervalo);
+                }
+            }, 1000);
+
+        }, 3000);
+
+    }
+
+    function Comprobar() {
+
+        clearInterval(intervalo);
+
+        if (ComparaArrays(arrayAleatorios, arrayAleatoriosJugador) == true) {
+            numeroAleatorios++;
+            alert("Has acertado con punt..");
+            Jugar();
+        } else {
+            alert("HAS PERDIDO ")
+        }
+    }
+
+    this.onload = () => {
+
+        document.getElementById("btnIniciar").addEventListener("click", () => {
+            Jugar();
+        });
+
+        document.getElementById("btnComprobar").addEventListener("click", () => {
+            Comprobar();
+        });
+
+        ClicksBotones();
+
+
+    }
+
+</script>
+
+<body>
+    <div> AFA Memory </div>
+
+    <button id="btnIniciar">Jugar</button>
+
+    <div id="contenedor">
+        <div id="numeros">Números</div>
+        <div id="tiempo">Tiempo</div>
+    </div>
+
+    <div>
+        <button id="0">0</button>
+        <button id="1">1</button>
+        <button id="2">2</button>
+        <button id="3">3</button>
+        <button id="4">4</button>
+        <button id="5">5</button>
+        <button id="6">6</button>
+        <button id="7">7</button>
+        <button id="8">8</button>
+        <button id="9">9</button>
+    </div>
+
+    <div id="numerosSeleccionados"></div>
+
+    <button id="btnComprobar">Comprobar</button>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      //setTimeout(actualizarFecha, 2000);
+      //clearTimeOut
+
+      let timer = setInterval(actualizarFecha, 1000);
+
+      setInterval(() => {
+        clearInterval(timer);
+      }, 5000);
+    };
+
+    function actualizarFecha() {
+      let hora = new Date().toLocaleTimeString();
+      document.body.innerHTML = hora;
+    }
+  </script>
+  <body></body>
+</html>

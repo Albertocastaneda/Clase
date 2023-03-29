@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function marcar_desmarcar() {
+      for (let index = 0; index < document.formulario.campos.length; index++) {
+        document.formulario.campos[index].checked =
+          document.formulario.marcar.checked;
+      }
+    }
+    this.onload = () => {};
+  </script>
+  <body>
+    <form action="" name="formulario">
+      Marcar/Desmarcar<input
+        type="checkbox"
+        name="marcar"
+        onclick="marcar_desmarcar()"
+      /><br />
+      Wordpress<input type="checkbox" name="campos" /><br />
+      Drupal<input type="checkbox" name="campos" /><br />
+      Joomla<input type="checkbox" name="campos" /><br />
+      PHPBB<input type="checkbox" name="campos" /><br />
+      SMF<input type="checkbox" name="campos" />
+    </form>
+  </body>
+</html>

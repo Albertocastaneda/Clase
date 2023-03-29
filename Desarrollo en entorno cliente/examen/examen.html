@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    let intervalo;
+    let numeroIntroducido;
+    // clase numeros
+    class Numeros {
+      puntuacion;
+      numeroAleatorio;
+      // constructor
+      constructor(puntuacion, numeroAleatorios) {
+        this.puntuacion = Math.floor(Math.random() * 10); // random
+        this.numeroAleatorio = Math.floor(Math.random() * 10); // random
+      }
+      // getters
+      getPuntuacion() {
+        return this.puntuacion;
+      }
+      getNumeroAleatorio() {
+        return this.numeroAleatorio;
+      }
+    }
+    // deja a el usuario introducir el numero si se cancela el promt y no se introduce nada tras 5 segundos
+    // saldra el mensaje de partida perdida
+    function introducirNumeros() {
+      numeroIntroducido = window.prompt("Introduzca numero");
+    }
+    // desabilita los botones
+    function desabiltarBotones() {
+      document.getElementById("0").disabled = true;
+      document.getElementById("1").disabled = true;
+      document.getElementById("2").disabled = true;
+      document.getElementById("3").disabled = true;
+      document.getElementById("4").disabled = true;
+      document.getElementById("5").disabled = true;
+      document.getElementById("6").disabled = true;
+      document.getElementById("7").disabled = true;
+      document.getElementById("8").disabled = true;
+      document.getElementById("9").disabled = true;
+      document.getElementById("btnComprobar").disabled = true;
+    }
+    // habilita los botones
+    function habilitarBotones() {
+      document.getElementById("0").disabled = false;
+      document.getElementById("1").disabled = false;
+      document.getElementById("2").disabled = false;
+      document.getElementById("3").disabled = false;
+      document.getElementById("4").disabled = false;
+      document.getElementById("5").disabled = false;
+      document.getElementById("6").disabled = false;
+      document.getElementById("7").disabled = false;
+      document.getElementById("8").disabled = false;
+      document.getElementById("9").disabled = false;
+      document.getElementById("btnComprobar").disabled = false;
+    }
+    // pasados los 5 segundos saldra el mensaje de partida perdida
+    function partidaPerdida() {
+      intervalo = setInterval(() => {
+        document.getElementById("numeros").innerText =
+          "Has perdidos.Tiempo superior a 5 segundos";
+      }, 5000);
+    }
+    // cuando se hace click en el boton empezara el juego
+    function empezarJuego() {
+      //creacion de objeto numero
+      let numero = new Numeros();
+      document.getElementById("numeros").innerText =
+        numero.getNumeroAleatorio();
+      desabiltarBotones();
+      // intervalo para habilitar los botones y dejar al usuario introducir el numero
+      setTimeout(() => {
+        document.getElementById("numeros").innerText = " ";
+        habilitarBotones();
+        partidaPerdida();
+        introducirNumeros();
+        if (numeroIntroducido == numero.getNumeroAleatorio()) {
+          window.alert(
+            "Has acertado tu puntuacion fue: " + numero.getPuntuacion()
+          );
+          clearInterval(intervalo);
+        }
+      }, 3000);
+    }
+    // evento onload
+    this.onload = () => {
+      document
+        .getElementById("btnIniciar")
+        .addEventListener("click", empezarJuego);
+    };
+  </script>
+  <body>
+    <div>AFA Memory</div>
+    <button id="btnIniciar">Jugar</button>
+    <div id="contenedor">
+      <div id="numeros">Numeros</div>
+      <div id="tiempo">Tiempo</div>
+    </div>
+    <div id="contenedorNums">
+      <button id="0">0</button>
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="4">4</button>
+      <button id="5">5</button>
+      <button id="6">6</button>
+      <button id="7">7</button>
+      <button id="8">8</button>
+      <button id="9">9</button>
+    </div>
+    <div id="numerosSeleccionados"></div>
+    <button id="btnComprobar">Comprobar</button>
+  </body>
+</html>

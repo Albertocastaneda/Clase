@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#formulario").submit(function (event) {
+            event.preventDefault();
+
+            let dni = $("#dni").val();
+            let nyap = $("#nyap").val();
+
+            $.ajax({
+                url: "https://bbdd.lhdevsolutions.net:50500/api/personas",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    dni: dni,
+                    nyap: nyap
+                }),
+                success: function (data) {
+                    $("#mensaje").text("Persona agregada.");
+                }
+            });
+        });
+    });
+
+</script>
+<body>
+    <div class="container btn-info">
+        <form id="formulario">
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI:</label>
+                <input type="text" class="form-control" id="dni" placeholder="DNI" name="dni">
+            </div>
+            <div class="mb-3">
+                <label for="nyap" class="form-label">Nombre y Apellidos</label>
+                <input type="text" class="form-control" id="nyap" placeholder="Nombre y Apellidos"
+                    name="nyap">
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button><br>
+            <p id="mensaje"></p>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function enviar() {
+      if (
+        formulario.nuevaVentana.checked == true &&
+        formulario.mismaVentana.checked == true
+      ) {
+        alert("Por favor, marca una sola casilla");
+        return true;
+      }
+      if (formulario.nuevaVentana.checked == true) {
+        formulario.target = "_blank";
+        var paginaMetida = "https://www." + formulario.pagina.value + ".com/";
+        formulario.action = paginaMetida;
+      }
+      if (formulario.mismaVentana.checked == true) {
+        formulario.target = "_self";
+        var paginaMetida = "https://www." + formulario.pagina.value + ".com/";
+        formulario.action = paginaMetida;
+      }
+      formulario.submit();
+    }
+    function palabra() {
+      nombre2.value = nombre1.value;
+      document.getElementById("modificable").focus();
+    }
+    function pintar(params) {
+      document.getElementById("modificable").style.color = "red";
+    }
+    function salir(params) {
+      document.getElementById("modificable").style.color = "blue";
+    }
+    function checkDesabilitado() {
+      formCheckbox.intereses[0].disabled = true;
+      formCheckbox.intereses[1].disabled = true;
+      formCheckbox.intereses[2].disabled = true;
+    }
+    function checkHabilitado() {
+      formCheckbox.intereses[0].disabled = false;
+      formCheckbox.intereses[1].disabled = false;
+      formCheckbox.intereses[2].disabled = false;
+    }
+    this.onload = () => {
+      nombre1 = document.getElementById("modificable");
+      nombre2 = document.getElementById("noModificable");
+      formCheckbox = document.getElementById("formCheckbox");
+      checkDesabilitado();
+    };
+  </script>
+  <body>
+    <form action="" method="get" name="formulario">
+      Pagina Web: <input type="textarea" name="pagina" /><br />
+      <input type="checkbox" name="nuevaVentana" />Resultado en nueva ventana
+      <input type="checkbox" name="mismaVentana" />En la misma ventana <br />
+      <input type="button" value="Enviar" onclick="enviar()" />
+    </form>
+    <br />
+    <form action="" name="formulario2">
+      <fieldset>
+        <legend>input text</legend>
+        <label for="modificable">Campo</label>
+        <input
+          type="text"
+          name="modificable"
+          id="modificable"
+          oninput="palabra()"
+          onfocus="pintar()"
+          onblur="salir()"
+        />
+        <label for="noModificable">Campo no modificable</label>
+        <input type="text" name="noModificable" id="noModificable" disabled />
+      </fieldset>
+    </form>
+    <br />
+    <form action="" id="formCheckbox">
+      <label>Servicio de musica</label>
+      <input type="checkbox" name="intereses" />Spotify
+      <input type="checkbox" name="intereses" />Last FM
+      <input type="checkbox" name="intereses" />Itunes
+    </form>
+  </body>
+</html>

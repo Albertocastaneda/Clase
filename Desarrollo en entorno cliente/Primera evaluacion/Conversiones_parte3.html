@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversiones 4</title>
+  </head>
+  <body>
+    <h2>Invertir</h2>
+    <button onclick="inversion(invertir)">Invertir Conversiones</button>
+    <p></p>
+    <h2 id="celsiusaFar">Celsius a Fahrenheit</h2>
+    <button onclick="Grados(invertir)">Convertir</button>
+    <p></p>
+    <h2 id="nudosaKM">Nudos a Kilometros</h2>
+    <button onclick="Nudos(invertir)">Convertir</button>
+    <p></p>
+    <h2 id="eurosaDOL">Euros a Dolares</h2>
+    <button onclick="Euros(invertir)">Convertir</button>
+    <h2 id="kilometrosaMILL">Kilometros a Millas</h2>
+    <button onclick="KmMillas(invertir)">Convertir</button>
+    <p></p>
+    <div id="cajaResultado">
+      <p id="ResultadoE">Esperando operacion</p>
+    </div>
+  </body>
+  <script>
+    const CELSIUS_FARENHEIT = 1;
+    const FARENHEIT_CELSIUS = 2;
+    const EUROS_DOLARES = 3;
+    const DOLARES_EUROS = 4;
+    const KILOMETROS_NUDOS = 6;
+    const NUDOS_KILOMETROS = 7;
+    const KILOMETROS_MILLAS = 8;
+    const MILLAS_KILOMETROS = 9;
+
+    const CELSIUS_FARENHEIT_TXT = "Celsius a Farenheit";
+    const FARENHEIT_CELSIUS_TXT = "Farenheit a Celsius";
+    const EUROS_DOLARES_TXT = "Euros a Dolares";
+    const DOLARES_EUROS_TXT = "Dolares a Euros";
+    const KILOMETROS_NUDOS_TXT = "Kilometros a Nudos";
+    const NUDOS_KILOMETROS_TXT = "Nudos a Kilometros";
+    const KILOMETROS_MILLAS_TXT = "Kilometros a Millas";
+    const MILLAS_KILOMETROS_TXT = "Millas a Kilometros";
+
+    function RealizarOperacion(TipoOperacion) {
+      let operacion = TipoOperacion;
+      let txt = Texto;
+
+      switch (TipoOperacion) {
+        case CELSIUS_FARENHEIT:
+          break;
+        case NUDOS_KILOMETROS:
+          break;
+        case EUROS_DOLARES:
+          break;
+        case KILOMETROS_MILLAS:
+          break;
+        default:
+          break;
+      }
+    }
+  </script>
+</html>

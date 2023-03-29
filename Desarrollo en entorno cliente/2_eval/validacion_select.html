@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function validarSeleccionado() {
+      var selected = document.getElementById("seleccion");
+      var texto = document.getElementById("mostrar");
+
+      var index = selected.selectedIndex;
+      if (index == -1) {
+        window.alert("ha de seleccionar algun valor");
+      } else {
+        console.log(selected.value);
+        console.log(index);
+        formulario.mostrar.value = selected.value;
+      }
+    }
+  </script>
+  <body>
+    <form name="formulario">
+      <input
+        type="button"
+        id="boton"
+        value="Mostrar valor"
+        onclick="validarSeleccionado()"
+      /><br />
+      <select id="seleccion" size="10" multiple>
+        <option value="valor1">Texto opcion 1</option>
+        <option value="valor2">Texto opcion 2</option>
+        <option value="valor3">Texto opcion 3</option>
+        <option value="valor4">Texto opcion 4</option></select
+      ><br />
+      <input type="text" id="mostrar" />valor seleccionado
+    </form>
+  </body>
+</html>

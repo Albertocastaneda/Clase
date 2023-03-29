@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      console.log("DOM cargado");
+      document.getElementById("boton").addEventListener("click", parrafo);
+      document.getElementById("boton2").addEventListener("click", function () {
+        document.getElementById("parrafo").innerHTML = "cositas 2";
+      });
+    };
+    function parrafo() {
+      document.getElementById("parrafo").innerHTML = "se vienen cositas";
+    }
+  </script>
+  <body>
+    <button id="boton">Pulsar</button>
+    <button id="boton2">Pulsar</button>
+    <p id="parrafo">cositas</p>
+  </body>
+</html>

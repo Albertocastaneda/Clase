@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panaderia</title>
+  </head>
+  <style>
+    #Precio {
+      color: white;
+      border-radius: 15px;
+      font-size: x-large;
+    }
+    #PrecioT {
+      color: white;
+      border-radius: 15px;
+      font-size: x-large;
+    }
+    #PrecioTotal {
+      color: white;
+      border-radius: 15px;
+      font-size: x-large;
+    }
+    #T {
+      background-color: rgb(255, 255, 255, 0.5);
+      border-radius: 15px;
+    }
+    #PreguntaRecibo {
+      color: white;
+      border-radius: 15px;
+      font-size: x-large;
+    }
+    #cuerpo {
+      background-color: #111111;
+      padding: 0;
+      margin: 0;
+    }
+    #Producto {
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+    }
+    #TP1 {
+      height: 130px;
+      width: 150px;
+    }
+    #TP2 {
+      height: 130px;
+      width: 150px;
+    }
+    #TP3 {
+      height: 130px;
+      width: 150px;
+    }
+    #ImagenPanaderia {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-image: url("imagenheader.jpg");
+      align-items: center;
+    }
+    #contenedorLogo {
+      background-color: rgb(255, 255, 255, 0.5);
+      border-radius: 50%;
+    }
+    #PrecioPan {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      height: 200px;
+    }
+    #Toppings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url("images.jpg");
+      width: 100%;
+      height: 150px;
+      font-size: xx-large;
+      color: black;
+      border-radius: 15px;
+    }
+    #ContendorToppings {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    #Topping1 {
+      background-color: rgb(255, 255, 255, 0.5);
+      text-align: center;
+      border-radius: 70%;
+      margin-top: 40px;
+    }
+    #Topping2 {
+      background-color: rgb(255, 255, 255, 0.5);
+      text-align: center;
+      border-radius: 70%;
+      margin-top: 40px;
+    }
+    #Topping3 {
+      background-color: rgb(255, 255, 255, 0.5);
+      text-align: center;
+      border-radius: 70%;
+      margin-top: 40px;
+    }
+    #recibo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+    #botonRecibo {
+      background-color: rgb(255, 255, 255, 0.5);
+      border-radius: 10px;
+      width: 100px;
+      height: 30px;
+    }
+    #PrecioTopping {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+  <body id="cuerpo">
+    <!-- header con imagen del logo isertada por JS e imagen de fondo-->
+    <div id="ImagenPanaderia">
+      <div id="contenedorLogo">
+        <img id="Logo" alt="LogoPan" />
+      </div>
+    </div>
+    <!-- Imagen del producto que se pulsa y sale debajo su precio -->
+    <div id="PrecioPan">
+      <img id="Producto" alt="pan" />
+      <p id="Precio"></p>
+    </div>
+    <!-- header de los toppings con imagen de fondo -->
+    <div id="Toppings">
+      <p id="T">Toppings</p>
+    </div>
+    <!-- Contenerdor de los toppings alineados con flex que cuando se pulsan sale la respectiva imagen de cada topping -->
+    <div id="ContendorToppings">
+      <div id="Topping1">
+        <img id="TP1" alt="pipas" />
+        <p>Pipas</p>
+      </div>
+      <div id="Topping2">
+        <img id="TP2" alt="queso" />
+        <p>Nueces</p>
+      </div>
+      <div id="Topping3">
+        <img id="TP3" alt="pasas" />
+        <p>Pasas</p>
+      </div>
+    </div>
+    <!-- Contendor de la informacion de la venta alineada con flex indica el los diferentes precios -->
+    <div id="PrecioTopping">
+      <p id="PrecioT"></p>
+      <p id="PrecioTotal"></p>
+      <p id="PreguntaRecibo"></p>
+    </div>
+    <!-- boton que imprime el recibo que se mentiene oculto hasta que se selecciona un topping -->
+    <div id="recibo">
+      <button id="botonRecibo" hidden="true">Recibo</button>
+    </div>
+  </body>
+  <script>
+    this.onload = () => {
+      //imagenes
+      document.getElementById("Producto").src = "PanNoFondo.png";
+      document.getElementById("Logo").src = "LogoPan.png";
+      document.getElementById("TP1").src = "ToppingGeneral.png";
+      document.getElementById("TP2").src = "ToppingGeneral.png";
+      document.getElementById("TP3").src = "ToppingGeneral.png";
+      //eventos que hace que la imagen se cambie por la correspondiente cuando se pulsa
+      document.getElementById("TP1").addEventListener("click", () => {
+        let imagen = document.getElementById("TP1");
+        imagen.src = "Pipa.png";
+        productoCompleto.Nombre = "Pipas";
+        productoCompleto.PrecioTopping = 0.5;
+        //funcion que actualizar la informacion al pulsar
+        actualizarInf();
+      });
+      document.getElementById("TP2").addEventListener("click", () => {
+        let imagen = document.getElementById("TP2");
+        imagen.src = "nueces.png";
+        productoCompleto.Nombre = "Nueces";
+        productoCompleto.PrecioTopping = 0.75;
+        actualizarInf();
+      });
+      document.getElementById("TP3").addEventListener("click", () => {
+        let imagen = document.getElementById("TP3");
+        imagen.src = "pasas.png";
+        productoCompleto.Nombre = "Pasas";
+        productoCompleto.PrecioTopping = 1;
+        actualizarInf();
+      });
+      //evento que al pulsar en la imagen sale debajo su precio
+      document.getElementById("Producto").addEventListener("click", () => {
+        productoCompleto.PrecioPan = document.getElementById(
+          "Precio"
+        ).innerHTML = "Precio: 1,90 euros";
+      });
+      //imprime el la funcion alert por pantalla
+      document
+        .getElementById("botonRecibo")
+        .addEventListener("click", () => Recibo());
+    };
+    //objeto que guarda globalmente la imformacion del producto
+    let productoCompleto = new Object();
+    productoCompleto.PrecioPan = 1.9;
+    productoCompleto.Nombre = " ";
+    productoCompleto.PrecioTopping = 0;
+    productoCompleto.PrecioSinIva = 0;
+    productoCompleto.PrecioConIva = 0;
+    // Alert de el recibo
+    function Recibo(params) {
+      let Fecha = new Date();
+      alert(
+        Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          " " +
+          Fecha.getHours() +
+          ":" +
+          Fecha.getMinutes() +
+          ":" +
+          Fecha.getSeconds() +
+          "\nEl precio del pan es: " +
+          productoCompleto.PrecioPan +
+          "\nEl precio del topping es: " +
+          productoCompleto.PrecioTopping +
+          "\nEl precio total sin iva es: " +
+          productoCompleto.PrecioSinIva +
+          "\nEl precio total con iva es: " +
+          productoCompleto.PrecioConIva.toFixed(1)
+      );
+    }
+    //Funcion que hace que se actualize la informacion del producto cuando se hace click en cada imagen
+    function actualizarInf(params) {
+      productoCompleto.PrecioSinIva =
+        productoCompleto.PrecioPan + productoCompleto.PrecioTopping;
+      productoCompleto.PrecioConIva =
+        productoCompleto.PrecioSinIva + 0.21 * productoCompleto.PrecioSinIva;
+      document.getElementById("PrecioT").innerHTML =
+        "El precio del toppings es " + productoCompleto.PrecioTopping + "€";
+      document.getElementById("PrecioTotal").innerHTML =
+        "El precio completo sin Iva es " + productoCompleto.PrecioSinIva + "€";
+      document.getElementById("PreguntaRecibo").innerHTML =
+        "Si desea un ticket pulse el boton Recibo";
+      document.getElementById("botonRecibo").hidden = false;
+    }
+  </script>
+</html>

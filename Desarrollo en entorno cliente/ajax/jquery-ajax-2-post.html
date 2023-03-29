@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  let unObjeto={
+  marca: "Ford",
+  modelo: "Mondeo2",
+  km: 20,
+  precio: 20
+};
+  $("button").click(function(){
+    
+    $.ajaxSetup({
+  contentType: "application/json; charset=utf-8"
+});
+     $.post("https://bbdd.lhdevsolutions.net:50500/api/Coches",
+            JSON.stringify(unObjeto), function(data, status){
+                        let marca = data.marca;
+                        console.log("Data: " + marca + "\nStatus: " + status);
+                },"json");
+
+//     $.ajax({
+//                 type: "POST",
+//                 contentType: "application/json; charset=utf-8",
+//                 dataType: "json",
+//                 data: JSON.stringify(unObjeto),
+//                 url: "https://bbdd.lhdevsolutions.net:50500/api/coches",
+//                 success: function(result) {
+//                     console.log(result);
+//                 },
+//                 error: function(err) {
+//                     alert('Error', err);
+//                 }
+//             });
+//   });
+});
+});
+</script>
+</head>
+<body>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+</body>
+</html>

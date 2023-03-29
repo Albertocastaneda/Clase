@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #Contenedor {
+        background-color: aqua;
+        border: 2px solid;
+        text-align: center;
+    }
+
+    #divFuera {
+        border: 2px solid;
+        text-align: center;
+        display: inline-flex;
+        flex-direction: row;
+    }
+</style>
+<script>
+    let contadorDivsFuera = 1;
+    let contadorDivsDentro = 1;
+    let padre = document.getElementById("Contenedor");
+    function fuera() {
+        let contenedorFuera = document.createElement("div");
+        contenedorFuera.setAttribute("Id", "divFuera");
+        contenedorFuera.innerHTML = "Nodo Fuera" + contadorDivsFuera;
+        contenedorFuera.style.width = 70 + "px"
+        contenedorFuera.style.height = 70 + "px"
+        contenedorFuera.style.backgroundColor = "aqua"
+        contenedorFuera.style.margin = 2 + "px";
+        document.body.insertBefore(contenedorFuera, padre);
+        contadorDivsFuera++;
+    }
+    function dentro() {
+        let contenedorDentro = document.createElement("div");
+        contenedorDentro.setAttribute("Id", "divFuera");
+        contenedorDentro.innerHTML = "Nodo Dentro" + contadorDivsDentro;
+        contenedorDentro.style.width = 70 + "px"
+        contenedorDentro.style.height = 70 + "px"
+        contenedorDentro.style.backgroundColor = "aqua"
+        contenedorDentro.style.margin = 2 + "px";
+        document.getElementById("Contenedor").appendChild(contenedorDentro);
+        contadorDivsDentro++;
+    }
+    this.onload = () => {
+        document.getElementById("botonFuera").addEventListener("click", fuera);
+        document.getElementById("botonDentro").addEventListener("click", dentro);
+    }
+</script>
+
+<body>
+    <div id="Contenedor">
+        <h2>2º Cuerso de desarrollo de aplicaciones Web</h2>
+    </div>
+    <button id="botonFuera">Añadir fuera</button>
+    <button id="botonDentro">Añadir dentro</button>
+</body>
+
+</html>

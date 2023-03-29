@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    //https://bbdd.lhdevsolutions.net:50500/swagger/index.html
+    $(document).ready(function () {
+        $("#formulario").submit(function (event) {
+            event.preventDefault();
+
+            let dni = $("#dniBuscar").val();
+
+            $.ajax({
+                url: "https://bbdd.lhdevsolutions.net:50500/api/personas/" + dni,
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $("#dni").val(data.dni);
+                    $("#nyap").val(data.nyap);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $("#formularioActualizar").submit(function (event) {
+            event.preventDefault();
+
+            let dni = $("#dni").val();
+            let nyap = $("#nyap").val();
+
+            $.ajax({
+                url: "https://bbdd.lhdevsolutions.net:50500/api/personas/" + dni,
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    dni: dni,
+                    nyap: nyap
+                }),
+                success: function (data) {
+                    alert("Persona Actualizada");
+                }
+            });
+
+        });
+
+    });
+</script>
+
+<body>
+    <!-- <form id="formulario">
+        <label for="dniBuscar">DNI del Usuario a Actualizar:</label>
+        <input type="text" id="dniBuscar" name="dniBuscar"><br>
+        <button type="submit">Buscar</button>
+    </form><br> -->
+    <div class="container btn-info">Buscar Persona</div><br>
+    <div class="container bg-primary">
+        <form id="formulario">
+            <div class="mb-3">
+                <label for="dniBuscar" class="form-label">DNI:</label>
+                <input type="text" class="form-control" id="dniBuscar" placeholder="DNI" name="dniBuscar"><br>
+                <button type="submit" class="btn btn-warning">Buscar</button>
+            </div>
+        </form>
+    </div><br>
+    <div class="container btn-info">ACTUALIZAR DATOS</div><br>
+    <div class="container bg-success">
+        <form id="formularioActualizar">
+            <div class="mb-3">
+                <label for="dni" class="form-label">DNI:</label>
+                <input type="text" class="form-control" id="dni" placeholder="DNI" name="dni">
+            </div>
+            <div class="mb-3">
+                <label for="nyap" class="form-label">Nombre y Apellidos</label>
+                <input type="text" class="form-control" id="nyap" placeholder="Nombre y Apellidos" name="nyap">
+            </div>
+            <button type="submit" class="btn btn-warning">Actualizar</button><br>
+        </form>
+    </div>
+    <!-- <form id="formularioActualizar">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni"><br>
+        <label for="nyap">Nombre y Apellidos:</label>
+        <input type="text" id="nyap" name="nyap"><br>
+        <button type="submit">Actualizar</button>
+    </form> -->
+</body>
+
+</html>

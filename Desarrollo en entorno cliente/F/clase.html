@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #general{
+        display: flex;
+        flex-direction: row;
+        background-color: blue;
+        overflow: auto;
+    }
+    #cuadrados{
+        width: 60px;
+        height: 50px;
+        margin: 3px;
+    }
+</style>
+<script>
+    this.onload = () =>{
+        document.querySelector("#boton").addEventListener("click",añadirCuadrados);
+    }
+    function añadirCuadrados() {
+        let cuadrados = document.createElement("div");
+        cuadrados.setAttribute("Id","cuadrados");
+        cuadrados.innerHTML = "cuadrado";
+        cuadrados.style.backgroundColor = "red";
+        document.getElementById("general").appendChild(cuadrados);
+    }
+</script>
+<body>
+    <div id="general"></div>
+    <button id="boton"></button>
+</body>
+</html>

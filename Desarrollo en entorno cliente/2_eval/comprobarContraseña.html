@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function comprobar() {
+      let contraseña = document.getElementById("pass").value;
+      let Rcontraseña = document.getElementById("Rc").value;
+      if (contraseña != Rcontraseña) {
+        alert("La contraseña no coincide");
+      }
+    }
+    this.onload = () => {};
+  </script>
+  <body>
+    <form name="formulario" onsubmit="comprobar()">
+      Contraseña <input type="password" name="contraseña" id="pass" /><br />
+      Repite la contraseña
+      <input type="password" name="RepiteCon" id="Rc" /><br />
+      <input type="submit" value="submit" />
+    </form>
+  </body>
+</html>

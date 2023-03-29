@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function seleccion() {
+      //   console.log(formulario.nombre.options);
+      for (let index = 0; index < formulario.nombre.options.length; index++) {
+        console.log(formulario.nombre.options[index].value);
+      }
+    }
+    function funcionEquipos(params) {
+      if (params.options[params.options.selectedIndex].value == "valor1") {
+        let opcion1 = new option("Real Oviedo", "Real Oviedo", false, true);
+        seleccionEquipos.valorEquipos.add(opcion1);
+        let opcion2 = new option("Barcelona", "Barcelona", false, true);
+        seleccionEquipos.valorEquipos.add(opcion2);
+      } else if (
+        params.options[params.options.selectedIndex].value == "valor2"
+      ) {
+        let opcion3 = new option("Sporting", "Sporting", false, true);
+        seleccionEquipos.valorEquipos.add(opcion3);
+        let opcion4 = new option("Guijuelo", "Guijuelo", false, true);
+        seleccionEquipos.valorEquipos.add(opcion4);
+      }
+    }
+    function borrar() {
+      let selected_item = document;
+    }
+  </script>
+  <body>
+    <form action="" nombre="seleccionEquipos">
+      <select name="equipos" onchange="funcionEquipos()">
+        <option value="valor0">seleccione una opcion</option>
+        <option value="valor1">Equipos primera</option>
+        <option value="valor2">Equipos segunda</option>
+      </select>
+      <select name="valorEquipos">
+        <option value="valor0">seleccione una opcion</option>
+      </select>
+      <input type="button" value="enviar" />
+    </form>
+    <br />
+    <form action="" name="formulario">
+      <select name="nombre" size="10" multiple onchange="seleccion()">
+        <option value="valor1">Texto opcion 1</option>
+        <option value="valor2">Texto opcion 2</option>
+        <option value="valor3">Texto opcion 3</option>
+        <option value="valor4">Texto opcion 4</option>
+        <option value="valor5">Texto opcion 5</option>
+        <option value="valor6">Texto opcion 6</option>
+        <option value="valor7">Texto opcion 7</option>
+        <option value="valor8">Texto opcion 8</option>
+        <option value="valor9">Texto opcion 9</option>
+        <option value="valor10">Texto opcion 10</option>
+      </select>
+    </form>
+    <br />
+  </body>
+</html>

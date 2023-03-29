@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panaderia</title>
+  </head>
+  <style>
+    #contenedor {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      grid-gap: 8px;
+      background-color: rgba(240, 180, 14, 0.973);
+      border-radius: 15px;
+    }
+    #ImagenPanaderia {
+      grid-column: 1 / 4;
+      grid-row: 1 / 1;
+      text-align: center;
+      font-size: xx-large;
+      align-content: center;
+      background-image: url("imagenheader.jpg");
+      width: 100%;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #PrecioPan {
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+      text-align: center;
+    }
+    #Toppings {
+      grid-column: 1 / 4;
+      grid-row: 3 / 4;
+      text-align: center;
+      background-image: url("toppings.jpg");
+      display: flex;
+      flex-direction: column;
+      font-size: xx-large;
+    }
+    #Topping1 {
+      grid-column: 1 / 2;
+      grid-row: 4 / 5;
+      text-align: center;
+    }
+    #Topping2 {
+      grid-column: 2 / 3;
+      grid-row: 4 / 5;
+      text-align: center;
+    }
+    #Topping3 {
+      grid-column: 3 / 4;
+      grid-row: 4 / 5;
+      text-align: center;
+    }
+    #PrecioTopping {
+      grid-column: 1 / 4;
+      grid-row: 5 / 6;
+      text-align: center;
+      font-size: xx-large;
+    }
+    #recibo {
+      grid-column: 1 / 4;
+      grid-row: 6 / 7;
+      text-align: center;
+    }
+    #TP1 {
+      height: 130px;
+      width: 150px;
+    }
+    #TP2 {
+      height: 130px;
+      width: 150px;
+    }
+    #TP3 {
+      height: 130px;
+      width: 150px;
+    }
+    #Producto {
+      height: 80px;
+      width: 80px;
+      border-radius: 10px;
+    }
+    #nombre {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 15px;
+    }
+    #slogan {
+      font-size: large;
+      color: whitesmoke;
+    }
+  </style>
+  <body>
+    <div id="contenedor">
+      <div id="ImagenPanaderia">
+        <p id="nombre">Chuflonaderia</p>
+        <p id="slogan">I Got Ma A on You</p>
+      </div>
+      <div id="PrecioPan">
+        <img id="Producto" src="pan.jpg" alt="pan" />
+        <p id="Precio"></p>
+      </div>
+      <div id="Toppings">Toppings</div>
+      <div id="Topping1">
+        <img id="TP1" alt="pipas" />
+        <p>pipas</p>
+      </div>
+      <div id="Topping2">
+        <img id="TP2" alt="queso" />
+        <p>Nueces</p>
+      </div>
+      <div id="Topping3">
+        <img id="TP3" alt="pasas" />
+        <p>Pasas</p>
+      </div>
+      <div id="PrecioTopping">
+        <p id="PrecioT"></p>
+        <p id="PrecioTotal"></p>
+        <p id="PreguntaRecibo"></p>
+      </div>
+      <div id="recibo">
+        <button id="botonRecibo" hidden="true">Recibo</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    this.onload = () => {
+      document.getElementById("TP1").src = "ToppingGeneral.png";
+      document.getElementById("TP2").src = "ToppingGeneral.png";
+      document.getElementById("TP3").src = "ToppingGeneral.png";
+      document.getElementById("TP1").addEventListener("click", () => {
+        let imagen = document.getElementById("TP1");
+        imagen.src = "Pipa.png";
+        productoCompleto.Nombre = "Pipas";
+        productoCompleto.PrecioTopping = 0.5;
+        actualizarInf();
+      });
+      document.getElementById("TP2").addEventListener("click", () => {
+        let imagen = document.getElementById("TP2");
+        imagen.src = "nueces.png";
+        productoCompleto.Nombre = "Nueces";
+        productoCompleto.PrecioTopping = 0.75;
+        actualizarInf();
+      });
+      document.getElementById("TP3").addEventListener("click", () => {
+        let imagen = document.getElementById("TP3");
+        imagen.src = "pasas.png";
+        productoCompleto.Nombre = "Pasas";
+        productoCompleto.PrecioTopping = 1;
+        actualizarInf();
+      });
+      document.getElementById("Producto").addEventListener("click", () => {
+        productoCompleto.PrecioPan = document.getElementById(
+          "Precio"
+        ).innerHTML = "Precio: 1,90 euros";
+      });
+      document
+        .getElementById("botonRecibo")
+        .addEventListener("click", () => Recibo());
+    };
+    let productoCompleto = new Object();
+    productoCompleto.PrecioPan = 1.9;
+    productoCompleto.Nombre = " ";
+    productoCompleto.PrecioTopping = 0;
+    productoCompleto.PrecioSinIva = 0;
+    productoCompleto.PrecioConIva = 0;
+    function Recibo(params) {
+      let Fecha = new Date();
+      alert(
+        Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          " " +
+          Fecha.getHours() +
+          ":" +
+          Fecha.getMinutes() +
+          ":" +
+          Fecha.getSeconds() +
+          "\nEl precio del pan es: " +
+          productoCompleto.PrecioPan +
+          "\nEl precio del topping es: " +
+          productoCompleto.PrecioTopping +
+          "\nEl precio total sin iva es: " +
+          productoCompleto.PrecioSinIva +
+          "\nEl precio total con iva es: " +
+          productoCompleto.PrecioConIva.toFixed(1)
+      );
+    }
+    function actualizarInf(params) {
+      productoCompleto.PrecioSinIva =
+        productoCompleto.PrecioPan + productoCompleto.PrecioTopping;
+      productoCompleto.PrecioConIva =
+        productoCompleto.PrecioSinIva + 0.21 * productoCompleto.PrecioSinIva;
+      document.getElementById("PrecioT").innerHTML =
+        "El precio del toppings es " + productoCompleto.PrecioTopping + "€";
+      document.getElementById("PrecioTotal").innerHTML =
+        "El precio completo sin Iva es " + productoCompleto.PrecioSinIva + "€";
+      document.getElementById("PreguntaRecibo").innerHTML =
+        "Si desea un ticket pulse el boton Recibo";
+      document.getElementById("botonRecibo").hidden = false;
+    }
+  </script>
+</html>

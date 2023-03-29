@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad4_2_1</title>
+    <script type="text/javascript">
+        let mensaje = [];
+        function imprimirInformacion(mensaje) {
+            document.getElementById("datos").innerHTML = '<h1>' + mensaje[0] + '</h1>';
+            for (var i = 1; i < mensaje.length; i++) {
+                document.getElementById("datos").innerHTML += '<p>' + mensaje[i] + '</p>';
+            }
+        }
+        function datos(event) {
+            mensaje = [];
+            let clienteX = event.clientX;
+            let clienteY = event.clientY;
+            let mensajerCoorX = "coordenadaX " + clienteX;
+            let mensajerCoorY = "coordenadaY " + clienteY;
+            mensaje.push(mensajerCoorX);
+            mensaje.push(mensajerCoorY);
+            return mensaje;
+        }
+        this.onload = () => {
+            document.addEventListener("mousemove", () => { imprimirInformacion(datos(event)) });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="datos"></div>
+</body>
+
+</html>

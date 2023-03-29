@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversiones</title>
+  </head>
+  <script>
+    this.onload = () => {
+      document
+        .getElementById("inversionB")
+        .addEventListener("click", () => inversion(invertir));
+      document
+        .getElementById("edad")
+        .addEventListener("click", () => calcularEdad);
+      document
+        .getElementById("CelsiusFarenheith")
+        .addEventListener("click", () => Grados(invertir));
+      document
+        .getElementById("NudosKM")
+        .addEventListener("click", () => Nudos(invertir));
+      document
+        .getElementById("EurosDolares")
+        .addEventListener("click", () => Euros(invertir));
+      document
+        .getElementById("KilometrosMillas")
+        .addEventListener("click", () => KmMillas(invertir));
+      document
+        .getElementById("cajaResultado")
+        .addEventListener("mouseover", () => {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "grey";
+        });
+      document
+        .getElementById("cajaResultado")
+        .addEventListener("mouseout", () => {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "white";
+        });
+      document
+        .getElementById("edadD")
+        .addEventListener("click", () => edadDias(invertir));
+    };
+    var invertir = false;
+    // funcion que identifica si el boton de invertir esta pulsado e invierte las conversiones y los textos
+    function inversion(valor) {
+      if (invertir == false) {
+        //esta iniciado en false por lo que al pulsarlo lo pone en true y cambia los textos
+        invertir = true;
+        document.getElementById("celsiusaFar").innerHTML =
+          "Fahrenheit a celsius";
+        document.getElementById("nudosaKM").innerHTML = "Kilometros a nudos";
+        document.getElementById("eurosaDOL").innerHTML = "Dolares a euros";
+        document.getElementById("kilometrosaMILL").innerHTML =
+          "Millas a kilometros";
+        document.getElementById("edadEnDias").innerHTML =
+          "Dias Fecha nacimiento";
+      } else if (invertir == true) {
+        //Los textos vuelven a su estado inicial
+        invertir = false;
+        document.getElementById("celsiusaFar").innerHTML =
+          "Celsius a fahrenheit";
+        document.getElementById("nudosaKM").innerHTML = "Nudos a Kilometros";
+        document.getElementById("eurosaDOL").innerHTML = "Euros a dolares";
+        document.getElementById("kilometrosaMILL").innerHTML =
+          "Kilometros a millas";
+        document.getElementById("edadEnDias").innerHTML = "Edad en Dias";
+      }
+    }
+    function calcularEdad(params) {
+      var añoNacimineto = window.prompt("Escriba su año de nacimiento");
+      var añoActual = window.prompt("Escriba el año actual");
+      var resultado = añoActual - añoNacimineto;
+      document.getElementById("ResultadoE").innerHTML =
+        "Tu edad es: " + resultado;
+      conversiones.NumOperacionesRealizadas++;
+      console.log(
+        "Total de operaciones: " + conversiones.NumOperacionesRealizadas
+      );
+      conversiones.UltimaOperacionRealizada = "EDAD";
+      console.log("Ultima operacion " + conversiones.UltimaOperacionRealizada);
+    }
+    //funcion de las temperaturas
+    function Grados(invertir) {
+      //si el boton esta sin pulsar la conversion sera normal
+      if (invertir == false) {
+        var grados = window.prompt("Indique los grados celsius");
+        console.log("El usuario introdujo: " + grados);
+        var fahrenheit = parseFloat(grados * 1.8);
+        document.getElementById("ResultadoE").innerHTML =
+          "La conversion es: " + fahrenheit;
+        //cambio de color del fondo y la letra
+        if (fahrenheit >= 40) {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "red";
+          document.getElementById("cajaResultado").style.color = "white";
+        }
+        if (fahrenheit <= 5) {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "blue";
+        }
+        //si esta pulsado hace la operacion inversa
+      } else if (invertir == true) {
+        var grados = window.prompt("Indique los fahrenheit");
+        console.log("El usuario introdujo: " + grados);
+        var fahrenheit = parseFloat(grados / 1.8);
+        document.getElementById("ResultadoE").innerHTML =
+          "La conversion es: " + fahrenheit;
+        if (fahrenheit >= 40) {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "red";
+          document.getElementById("cajaResultado").style.color = "white";
+        }
+        if (fahrenheit <= 5) {
+          document.getElementById("cajaResultado").style.backgroundColor =
+            "blue";
+        }
+      }
+      conversiones.NumOperacionesRealizadas++;
+      console.log(
+        "Total de operaciones: " + conversiones.NumOperacionesRealizadas
+      );
+      conversiones.UltimaOperacionRealizada = "Celsius a Farenheit";
+      console.log("Ultima operacion " + conversiones.UltimaOperacionRealizada);
+      //Imprime Fecha
+      let Fecha = conversiones.Fecha;
+      console.log(
+        "Fecha de la ultima operacion: " +
+          Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          "/" +
+          Fecha.getHours() +
+          "/" +
+          Fecha.getMinutes() +
+          "/" +
+          Fecha.getSeconds()
+      );
+    }
+    // funcion de nudos a kilometros
+    function Nudos(invertir) {
+      //identifica si el boton esta pulsado o no
+      if (invertir == false) {
+        var nudos = window.prompt("Indique los nudos");
+        console.log("El usuario introdujo: " + nudos + " nudos");
+        var kilometros = parseFloat(nudos * 1.852);
+        document.getElementById("ResultadoE").innerHTML =
+          "La conversion a Km es: " + kilometros;
+        //cambio de color de fondo y letra con su estilo
+        if (kilometros > 120) {
+          document.getElementById("cajaResultado").style.color = "red";
+          document.getElementById("cajaResultado").style.fontSize = "24px";
+          document.getElementById("cajaResultado").style.fontWeight = "bold";
+        }
+        if (kilometros < 120) {
+          document.getElementById("cajaResultado").style.color = "green";
+          document.getElementById("cajaResultado").style.fontSize = "14px";
+          document.getElementById("cajaResultado").style.fontWeight = "normal";
+        }
+        conversiones.UltimaOperacionRealizada = "Nudos a Kilometros";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+        //el boton esta pulsado por lo que hace la conversion inversa
+      } else if (invertir == true) {
+        var nudos = window.prompt("Indique los kilometros");
+        console.log("El usuario introdujo: " + nudos + " kilometros");
+        var kilometros = parseFloat(nudos / 1.852);
+        document.getElementById("ResultadoE").innerHTML =
+          "La conversion a nudos es: " + kilometros;
+        if (kilometros > 120) {
+          document.getElementById("cajaResultado").style.color = "red";
+          document.getElementById("cajaResultado").style.fontSize = "24px";
+          document.getElementById("cajaResultado").style.fontWeight = "bold";
+        }
+        if (kilometros < 120) {
+          document.getElementById("cajaResultado").style.color = "green";
+          document.getElementById("cajaResultado").style.fontSize = "14px";
+          document.getElementById("cajaResultado").style.fontWeight = "normal";
+        }
+        conversiones.UltimaOperacionRealizada = "Kilometros a Nudos";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+      }
+      conversiones.NumOperacionesRealizadas++;
+      console.log(
+        "Total de operaciones: " + conversiones.NumOperacionesRealizadas
+      );
+      //Imprime Fecha
+      let Fecha = conversiones.Fecha;
+      console.log(
+        "Fecha de la ultima operacion: " +
+          Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          "/" +
+          Fecha.getHours() +
+          "/" +
+          Fecha.getMinutes() +
+          "/" +
+          Fecha.getSeconds()
+      );
+    }
+    //funcion de euros a dolares
+    function Euros(invertir) {
+      //identifica si esta pulsado o no
+      if (invertir == false) {
+        var euros = window.prompt("Indique la cantidad de euros");
+        console.log("El usuario introdujo: " + euros + " euros");
+        var dolares = parseFloat(euros * 0.99);
+        document.getElementById("cajaResultado").style.backgroundColor =
+          "white";
+        document.getElementById("cajaResultado").style.color = "black";
+        document.getElementById("ResultadoE").innerHTML =
+          "La cantidad en dolares es: " + dolares;
+        conversiones.UltimaOperacionRealizada = "Euros a Dolares";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+        // esta el boton pulsado por lo que hace la conversion inversa
+      } else if (invertir == true) {
+        var euros = window.prompt("Indique la cantidad de dolares");
+        console.log("El usuario introdujo: " + euros + " euros");
+        var dolares = parseFloat(euros / 0.99);
+        document.getElementById("cajaResultado").style.backgroundColor =
+          "white";
+        document.getElementById("cajaResultado").style.color = "black";
+        document.getElementById("ResultadoE").innerHTML =
+          "La cantidad en euros es: " + dolares;
+        conversiones.UltimaOperacionRealizada = "Dolares a Euros";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+      }
+      conversiones.NumOperacionesRealizadas++;
+      console.log(
+        "Total de operaciones: " + conversiones.NumOperacionesRealizadas
+      );
+      conversiones.UltimaOperacionRealizada = "Euros a Dolares";
+      console.log("Ultima operacion " + conversiones.UltimaOperacionRealizada);
+      //Imprime Fecha
+      let Fecha = conversiones.Fecha;
+      console.log(
+        "Fecha de la ultima operacion: " +
+          Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          "/" +
+          Fecha.getHours() +
+          "/" +
+          Fecha.getMinutes() +
+          "/" +
+          Fecha.getSeconds()
+      );
+    }
+    //Funcion de kilometros a millas
+    function KmMillas(invertir) {
+      //identifica si el boton es pulsado o no
+      if (invertir == false) {
+        var kilometro = window.prompt("Indique los kilometros");
+        console.log("El usuario introdujo " + kilometro + " kilometros");
+        var millas = parseFloat(kilometro / 1.609);
+        document.getElementById("cajaResultado").style.backgroundColor =
+          "white";
+        document.getElementById("cajaResultado").style.color = "black";
+        document.getElementById("ResultadoE").innerHTML =
+          "Las millas son: " + millas;
+        conversiones.UltimaOperacionRealizada = "Kilometros a Millas";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+        //el boton esta pulsado por lo que hace la conversion inversa
+      } else if (invertir == true) {
+        var kilometro = window.prompt("Indique las millas");
+        console.log("El usuario introdujo " + kilometro + " kilometros");
+        var millas = parseFloat(kilometro * 1.609);
+        document.getElementById("cajaResultado").style.backgroundColor =
+          "white";
+        document.getElementById("cajaResultado").style.color = "black";
+        document.getElementById("ResultadoE").innerHTML =
+          "Los kilometros son: " + millas;
+        conversiones.UltimaOperacionRealizada = "Millas a Kilometros";
+        console.log(
+          "Ultima operacion " + conversiones.UltimaOperacionRealizada
+        );
+      }
+      conversiones.NumOperacionesRealizadas++;
+      console.log(
+        "Total de operaciones: " + conversiones.NumOperacionesRealizadas
+      );
+      //Imprime Fecha
+      let Fecha = conversiones.Fecha;
+      console.log(
+        "Fecha de la ultima operacion: " +
+          Fecha.getDate() +
+          "/" +
+          (Fecha.getMonth() + 1) +
+          "/" +
+          Fecha.getFullYear() +
+          "/" +
+          Fecha.getHours() +
+          "/" +
+          Fecha.getMinutes() +
+          "/" +
+          Fecha.getSeconds()
+      );
+    }
+    //funcion que le pasas tu fecha de nacimiento y te lo devuelve en dias
+    function edadDias(invertir) {
+      let año = window.prompt("introduce el año");
+      let mes = window.prompt("introduce el mes");
+      let dia = window.prompt("introuce el dia");
+      let algo = año + "/" + mes + "/" + dia;
+      let fechanac = new Date(algo);
+      console.log(fechanac);
+      let fechaActual = new Date();
+      let resta = fechaActual.getTime() - fechanac.getTime();
+      let msDias = resta / 86400000;
+      let resultado = msDias;
+      document.getElementById("ResultadoE").innerHTML =
+        "Los dias son " + resultado;
+    }
+    var conversiones = new Object();
+    conversiones.NumOperacionesRealizadas = 0;
+    conversiones.UltimaOperacionRealizada = " ";
+    conversiones.ValorDeUltimaOperacion = 0;
+    conversiones.Fecha = new Date();
+  </script>
+  <body>
+    <h2>Invertir</h2>
+    <button id="inversionB">Invertir conversiones</button>
+    <h2>EDAD</h2>
+    <button id="edad">Calcular edad</button>
+    <p></p>
+    <h2 id="celsiusaFar">celsius a fahrenheit</h2>
+    <button id="CelsiusFarenheith">Convertir</button>
+    <p></p>
+    <h2 id="nudosaKM">Nudos a Kilometros</h2>
+    <button id="NudosKM">Convertir</button>
+    <p></p>
+    <h2 id="eurosaDOL">Euros a Dolares</h2>
+    <button id="EurosDolares">Convertir</button>
+    <h2 id="kilometrosaMILL">Kilometros a Millas</h2>
+    <button id="KilometrosMillas">Convertir</button>
+    <h2 id="edadEnDias">Edad en Dias</h2>
+    <button id="edadD">Convertir</button>
+    <p></p>
+    <div id="cajaResultado">
+      <p id="ResultadoE">Esperando operacion</p>
+    </div>
+  </body>
+</html>

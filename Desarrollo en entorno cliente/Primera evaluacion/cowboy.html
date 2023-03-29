@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cowboy</title>
+  </head>
+  <script>
+    // constante para modificar el numero de obstaculos
+    const NUMERO_OBSTACULOS = 10;
+    // constate para modifcar el tamaño del hueco por el que pasa la bola
+    const TAMAÑO_HUECO = 150;
+    // constante para el tamaño del div del cowboy
+    const TAMAÑO_COWBOY = 30;
+    // constante que indica la distancia a la que se mueve el cowboy
+    const DISTANCIA_MOVIMIENTO_COWBOY = 1;
+    // constantes con el codigo del teclado de las teclas de movimiento
+    const LEFT = 37;
+    const UP = 38;
+    const RIGHT = 39;
+    const DOWN = 40;
+    // constantes para colocar tanto por arriba como por abajo los obstaculos dentro del div
+    const DIV_CUERPO_TOP = 10;
+    const DIV_CUERPO_LEFT = 10;
+    // constante para calcular las distancias entre los obstaculos y que se mantengan dentro del div
+    const DISTANCIA_ENTRE_OBSTACULOS = 800;
+    const DISTANCIA_MINIMA_OBSTACULOS_DEL_COWBOY = 100;
+    // constante para el tamaño del div de finalizacion
+    const TAMAÑO_DIV_FINALIZACION = 30;
+    // contador para contar las veces que se toca una de las teclas de movimiento
+    let contadoMovimiento = 0;
+    // date que se utilizara para el calculo de los segundos jugados
+    let temporizador;
+    // segundo timer que se utilizara para el calculo de los segundos
+    let timerSegundos;
+    // variable para la creacion de el parrafo de la hora
+    let textoHora;
+    // variable para la creacion de el parrafo de los segundos
+    let textoSegundos;
+    // variables que guardan el tamaño de la pantalla
+    let anchoContendor = window.innerWidth - 20;
+    let altoContenedor = window.innerHeight - 20;
+    // variable para el cowboy
+    let imgCowboy;
+    // variable para el div de finalizacion del juego
+    let divFin;
+    // variable para guardar los codigos de las teclas de movimiento
+    let teclasMovimiento;
+    // intervalos para el set interval que indica cada cuanto tiempo se tiene que realizar las funciones
+    let intervalo;
+    let empezarIntervalo = false;
+    let empiezaJuego = false;
+    // array para los obstaculos
+    let obstaculos = [];
+    // clase obstaculo
+    class Obstaculo {
+      //propiedades
+      heigth;
+      width;
+      posicionX;
+      posicionY;
+      //constructor
+      constructor(heigth, width, posicionX, posicionY) {
+        this.heigth = heigth;
+        this.width = width;
+        this.posicionX = posicionX;
+        this.posicionY = posicionY;
+      }
+      // getters y setters
+      getHeigth() {
+        return this.heigth;
+      }
+      setHeight(h) {
+        this.heigth = h;
+      }
+      getWidth() {
+        return this.width;
+      }
+      setWidth(w) {
+        this.width = w;
+      }
+      getPosicionX() {
+        return this.posicionX;
+      }
+      getPosicionY() {
+        return this.posicionY;
+      }
+      setPosicionX(pX) {
+        this.posicionX = pX;
+      }
+      setPosicionY(pY) {
+        this.posicionY = pY;
+      }
+    }
+    // crea el contenedor que va a contener todo y le da estilos
+    function crearContenedor() {
+      let div = document.createElement("div");
+      div.setAttribute("Id", "divCuerpo");
+      div.style.width = anchoContendor + "px";
+      div.style.height = altoContenedor + "px";
+      div.style.color = "white";
+      document.body.appendChild(div);
+    }
+    // crea el div para los obstaculos y les da estilo
+    function crearDivObstaculo(index, obstaculo) {
+      let div = document.createElement("div");
+      div.setAttribute("Id", index);
+      div.style.width = obstaculo.getWidth() + "px";
+      div.style.height = obstaculo.getHeigth() + "px";
+      div.style.backgroundColor = "red";
+      div.style.position = "absolute";
+      div.style.top = obstaculo.getPosicionY() + "px";
+      div.style.left = obstaculo.getPosicionX() + "px";
+      document.getElementById("divCuerpo").appendChild(div);
+    }
+    // recorre todos los obstaculos y les da el estilo
+    function crearObstaculos() {
+      for (let index = 0; index < NUMERO_OBSTACULOS / 2; index++) {
+        crearObstaculoArribaYAbajo(index);
+      }
+    }
+    // funcion que le añade al obsjeto obstaculo toda la informacion para su posicionamineto y los mete en el array
+    function crearObstaculoArribaYAbajo(index) {
+      let obstaculoArriba = new Obstaculo();
+      let obstaculoAbajo = new Obstaculo();
+      obstaculoArriba.setWidth(15);
+      obstaculoArriba.setHeight(Math.random() * altoContenedor);
+      obstaculoArriba.setPosicionX(
+        DIV_CUERPO_LEFT +
+          DISTANCIA_MINIMA_OBSTACULOS_DEL_COWBOY +
+          (index * DISTANCIA_ENTRE_OBSTACULOS) / (NUMERO_OBSTACULOS / 2)
+      );
+      obstaculoArriba.setPosicionY(DIV_CUERPO_TOP);
+
+      obstaculoAbajo.setWidth(15);
+      obstaculoAbajo.setHeight(
+        altoContenedor - TAMAÑO_HUECO - obstaculoArriba.getHeigth()
+      );
+      obstaculoAbajo.setPosicionX(obstaculoArriba.getPosicionX());
+      obstaculoAbajo.setPosicionY(
+        altoContenedor - obstaculoAbajo.getHeigth() + DIV_CUERPO_TOP
+      );
+      obstaculos.push(obstaculoArriba);
+      obstaculos.push(obstaculoAbajo);
+    }
+    // crea el div del cowboy le da los estilos y le pone la imagen
+    function crearCowboy() {
+      let imagen = document.createElement("div");
+      imagen.setAttribute("Id", "imgCowboy");
+      imagen.style.backgroundColor = "blue";
+      imagen.style.backgroundImage = "url('cowboyIMG.png')";
+      imagen.style.backgroundRepeat = "no-repeat";
+      imagen.style.backgroundSize = "cover";
+      imagen.style.borderRadius = "50%";
+      imagen.style.width = TAMAÑO_COWBOY + "px";
+      imagen.style.height = TAMAÑO_COWBOY + "px";
+      imagen.style.position = "absolute";
+      imagen.style.left = DIV_CUERPO_LEFT + "px";
+      imagen.style.top = DIV_CUERPO_TOP + "px";
+      document.getElementById("divCuerpo").appendChild(imagen);
+    }
+    // crea el parrafo para la hora y el tamaño de la pantalla
+    function Hora() {
+      textoHora = document.createElement("p");
+      textoHora.setAttribute("Id", "hora");
+      textoHora.style.textAlign = "right";
+      textoHora.style.fontSize = "30px";
+      textoHora.style.fontWeight = "bold";
+      textoHora.style.color = "white";
+      textoHora.style.margin = "0";
+      document.getElementById("divCuerpo").appendChild(textoHora);
+    }
+    // crea el div de finalizacion
+    function crearDivFinalizacion() {
+      let div = document.createElement("div");
+      let parrafo = document.createElement("p");
+      div.setAttribute("Id", "divFinalizacion");
+      div.style.backgroundColor = "blue";
+      div.style.position = "absolute";
+      div.style.width = TAMAÑO_DIV_FINALIZACION + "px";
+      div.style.height = TAMAÑO_DIV_FINALIZACION + "px";
+      // posicionamiento al lado derecho de la pantalla independiente mente del tamaño de la pantalla
+      div.style.left = DIV_CUERPO_LEFT + window.innerWidth - 90 + "px";
+      div.style.top = DIV_CUERPO_TOP + window.innerHeight - 100 + "px";
+      parrafo.innerHTML = "FIN";
+      parrafo.style.textAlign = "center";
+      parrafo.style.margin = "auto";
+      document.getElementById("divCuerpo").appendChild(div);
+      document.getElementById("divFinalizacion").appendChild(parrafo);
+    }
+    // detecta las teclas de movimiento añadiendole las constante con sus codigos
+    function TeclasDeMovimiento(TeclaLeida) {
+      if (
+        TeclaLeida.keyCode == LEFT ||
+        TeclaLeida.keyCode == UP ||
+        TeclaLeida.keyCode == RIGHT ||
+        TeclaLeida.keyCode == DOWN
+      ) {
+        teclasMovimiento = TeclaLeida.keyCode;
+        // contador para indicar con cuantos movimientos ganas o pierdes
+        contadoMovimiento++;
+        // inicia el juego una vez que se toca una de las teclas de movimiento
+        if (!empiezaJuego) {
+          empezarJuego();
+          empiezaJuego = true;
+          temporizador = new Date();
+        }
+      }
+    }
+    // detecta las colisiones con el div de finalizacion de la partida
+    function detectarColisionesDivFinalizacion() {
+      if (
+        imgCowboy.offsetLeft <= divFin.offsetLeft + TAMAÑO_DIV_FINALIZACION &&
+        imgCowboy.offsetLeft + TAMAÑO_COWBOY >= divFin.offsetLeft &&
+        imgCowboy.offsetTop + TAMAÑO_COWBOY >= divFin.offsetTop &&
+        imgCowboy.offsetTop <= divFin.offsetTop + TAMAÑO_DIV_FINALIZACION
+      ) {
+        // print de toda la informacion de la partida segundos y movimientos
+        finDePartida();
+        // cambia la opacidad de los obstaculos en colision
+        opacidadDeLosObstaculos();
+        // se para el intervalo para que no puedas seguir moviendote
+        clearInterval(intervalo);
+      }
+    }
+    // detecta las colisiones con los obstaculos
+    function detectarColisiones() {
+      // recorre el array
+      for (let index = 0; index < obstaculos.length; index++) {
+        let obstaculo = obstaculos[index];
+        // condicion para los obstaculos
+        if (
+          imgCowboy.offsetLeft <=
+            obstaculo.getPosicionX() + obstaculo.getWidth() &&
+          imgCowboy.offsetLeft + TAMAÑO_COWBOY >= obstaculo.getPosicionX() &&
+          imgCowboy.offsetTop + TAMAÑO_COWBOY >= obstaculo.getPosicionY() &&
+          imgCowboy.offsetTop <=
+            obstaculo.getPosicionY() + obstaculo.getHeigth()
+        ) {
+          finDePartida();
+          opacidadDeLosObstaculos();
+          clearInterval(intervalo);
+        }
+      }
+    }
+    // funcion para poder mover el cowboy
+    function Movimiento() {
+      // coges la posicion del cowboy
+      let imagenCowboyX = imgCowboy.offsetLeft;
+      let imagenCowboyY = imgCowboy.offsetTop;
+      // tamaño del cowboy
+      let anchoCowboy = TAMAÑO_COWBOY;
+      let altoCowboy = TAMAÑO_COWBOY;
+      // detecta las colisiones con los bordes del div
+      if (
+        imagenCowboyX + TAMAÑO_COWBOY > anchoContendor ||
+        imagenCowboyX < DIV_CUERPO_LEFT ||
+        imagenCowboyY + TAMAÑO_COWBOY > altoContenedor ||
+        imagenCowboyY < DIV_CUERPO_TOP
+      ) {
+        finDePartida();
+        opacidadDeLosObstaculos();
+        clearInterval(intervalo);
+      } else {
+        // movimiento del cowboy
+        switch (teclasMovimiento) {
+          case LEFT:
+            imgCowboy.style.left =
+              imgCowboy.offsetLeft - DISTANCIA_MOVIMIENTO_COWBOY + "px";
+            break;
+          case UP:
+            imgCowboy.style.top =
+              imgCowboy.offsetTop - DISTANCIA_MOVIMIENTO_COWBOY + "px";
+            break;
+          case RIGHT:
+            imgCowboy.style.left =
+              imgCowboy.offsetLeft + DISTANCIA_MOVIMIENTO_COWBOY + "px";
+            break;
+          case DOWN:
+            imgCowboy.style.top =
+              imgCowboy.offsetTop + DISTANCIA_MOVIMIENTO_COWBOY + "px";
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    // intervalo que empieza una vez y comienza el juego
+    function empezarJuego() {
+      intervalo = setInterval(() => {
+        Movimiento();
+        detectarColisiones();
+        detectarColisionesDivFinalizacion();
+        crearHora();
+      }, 5);
+    }
+    // le da el estilo a los obstaculos una vez posicionados
+    function crearDivObstaculos() {
+      for (let index = 0; index < NUMERO_OBSTACULOS; index++) {
+        let obstaculo = obstaculos[index];
+        crearDivObstaculo(index, obstaculo);
+      }
+    }
+    // crea la hora el tamaño de la pantalla y los segundos durante los que estas jugando
+    function crearHora() {
+      textoHora.innerText =
+        new Date().toLocaleTimeString() +
+        " (" +
+        window.innerWidth +
+        "x" +
+        window.innerHeight +
+        ")";
+      // calculo de los segundos
+      textoSegundos.innerText = Math.round(
+        (new Date().getTime() - temporizador) / 1000
+      );
+    }
+    // crea el boton y el titulo de inicio y lo alinea en el centro
+    function crearPantallaInicio() {
+      // variables para evitar que se alinee en funcion de la primera letra
+      // de modo que lo inico que esta en el centro de la pantalla es la letra inicial
+      let ancho = 400;
+      let anchoBoton = 325;
+      let parrafo = document.createElement("h1");
+      parrafo.setAttribute("Id", "Titulo");
+      parrafo.innerHTML = "Juego Salvar al Cowboy";
+      let boton = document.createElement("button");
+      boton.innerHTML = "Comenzar Juego";
+      boton.setAttribute("Id", "boton");
+      parrafo.style.width = ancho + "px";
+      parrafo.style.position = "absolute";
+      // calculo para que se alinee todo en el centro
+      parrafo.style.left = anchoContendor / 2 - ancho / 2 + "px";
+      boton.style.width = anchoBoton + "px";
+      boton.style.position = "absolute";
+      boton.style.left = anchoContendor / 2 - ancho / 2 + "px";
+      parrafo.style.top = 50 + "px";
+      parrafo.style.color = "red";
+      boton.style.top = 150 + "px";
+      boton.style.color = "red";
+      document.getElementById("divCuerpo").appendChild(parrafo);
+      document.getElementById("divCuerpo").appendChild(boton);
+    }
+    // funcion que hace que se vea todo una vez que se hace click en el boton y cambia las opacidades y el color
+    // del div contenedor
+    function comenzarJuego() {
+      document.getElementById("divCuerpo").style.backgroundColor = "yellow";
+      document.getElementById("divCuerpo").style.backgroundImage =
+        "url('fondoCowboy.jpg')";
+      document.getElementById("divCuerpo").style.backgroundRepeat = "no-repeat";
+      document.getElementById("divCuerpo").style.backgroundSize = "cover";
+      document.getElementById("Titulo").style.opacity = 0.1;
+      document.getElementById("boton").style.display = "none";
+      crearParrafoSegundos();
+      crearDivFinalizacion();
+      crearObstaculos();
+      crearDivObstaculos();
+      crearCowboy();
+      imgCowboy = document.getElementById("imgCowboy");
+      divFin = document.getElementById("divFinalizacion");
+      document.addEventListener("keydown", TeclasDeMovimiento);
+      Hora();
+    }
+    // crea el parrafo de los segundos
+    function crearParrafoSegundos() {
+      textoSegundos = document.createElement("h2");
+      textoSegundos.setAttribute("Id", "parrafoSegundos");
+      textoSegundos.style.width = 50 + "px";
+      textoSegundos.style.fontSize = "x-large";
+      textoSegundos.style.position = "absolute";
+      textoSegundos.style.color = "white";
+      textoSegundos.style.left =
+        // posicionamiento
+        DIV_CUERPO_LEFT + window.innerWidth - 90 + "px";
+      textoSegundos.style.top =
+        DIV_CUERPO_TOP + window.innerHeight - 400 + "px";
+      document.getElementById("divCuerpo").appendChild(textoSegundos);
+    }
+    // crea el parrafo de fin de partida con la informacion de los segundos y los movimientos
+    // saldria una vez que se gana o se pierde
+    function finDePartida() {
+      let temporizardor2 = new Date();
+      let segundosFin = Math.round(
+        (temporizardor2.getTime() - temporizador.getTime()) / 1000
+      );
+      let parrafoFinPartida = document.createElement("p");
+      parrafoFinPartida.innerText =
+        "La partida finalizada con " +
+        segundosFin +
+        " segundos y " +
+        contadoMovimiento +
+        " movimientos";
+      parrafoFinPartida.style.fontSize = "25px";
+      parrafoFinPartida.style.fontWeight = "bold";
+      parrafoFinPartida.style.color = "white";
+      parrafoFinPartida.style.textAlign = "center";
+      parrafoFinPartida.style.position = "absolute";
+      parrafoFinPartida.style.top = "40%";
+      parrafoFinPartida.style.left = "30%";
+
+      document.getElementById("Titulo").style.opacity = 1;
+
+      document.getElementById("divCuerpo").appendChild(parrafoFinPartida);
+    }
+    // cambio de la opacidad de los obstaculos cuando se gana o se pierde
+    function opacidadDeLosObstaculos() {
+      // recorre el array de los obstaculos
+      let idObstaculo = 0;
+      obstaculos.forEach((element) => {
+        document.getElementById(idObstaculo).style.opacity = 0.1;
+        idObstaculo += 1;
+      });
+    }
+    this.onload = () => {
+      crearContenedor();
+      crearPantallaInicio();
+      document.getElementById("boton").addEventListener("click", comenzarJuego);
+      // crearDivFinalizacion();
+      // crearObstaculos();
+      // crearDivObstaculos();
+      // crearCowboy();
+      // imgCowboy = document.getElementById("imgCowboy");
+      // divFin = document.getElementById("divFinalizacion");
+      // document.addEventListener("keydown", TeclasDeMovimiento);
+      // Hora();
+    };
+  </script>
+  <body></body>
+</html>

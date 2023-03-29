@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    class Persona {
+      edad;
+      peso;
+      constructor() {
+        this.edad = parseInt(Math.random() * 80);
+        this.peso = parseInt(Math.random() * 100);
+        Object.seal(this);
+      }
+    }
+    let personas = 20;
+    let arrayPersonas = [];
+    function numpersonas(num) {
+      if (num == 0) {
+        return null;
+      } else {
+        let persona = new Persona();
+        if (persona.edad < 25) {
+          arrayPersonas[0].push(persona);
+        } else {
+          arrayPersonas[1].push(persona);
+        }
+        num = num - 1;
+        return numpersonas(num);
+      }
+    }
+    function personasMayoresMenores(personas) {
+      for (let index = 0; index < personas; index++) {
+        let persona = new Persona();
+        if (persona.edad < 25) {
+          arrayMenores25.push(persona);
+          console.log("Menores 25: " + JSON.stringify(persona));
+        } else if (persona.edad > 25) {
+          arrayMayores25.push(persona);
+          console.log("Mayores 25" + JSON.stringify(persona));
+        }
+      }
+    }
+    this.onload = () => {
+      // personasMayoresMenores(20);
+      // console.log("Array Mayores 25: ");
+      // console.log(JSON.stringify(arrayMayores25));
+      arrayPersonas[0] = new Array();
+      arrayPersonas[1] = new Array();
+      numpersonas(20);
+      console.log(arrayPersonas);
+    };
+  </script>
+  <body></body>
+</html>

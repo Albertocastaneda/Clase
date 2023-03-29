@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    this.onload = () => {
+
+        let formulario = document.getElementById('formulario');
+        formulario.addEventListener('submit', (evento) => {
+            evento.preventDefault();
+
+            let apiUrl = 'https://bbdd.lhdevsolutions.net:50500/api/personas';
+            let dni = document.getElementById('dni').value;
+
+            fetch(`${apiUrl}?dni=${dni}`)
+                .then(response => response.json())
+                .then(data => {
+                    let persona = data[0];
+                    mostrarFormulario(persona);
+                })
+                .catch(error => console.error(error));
+        });
+    }
+    function mostrarFormulario(persona) {
+        let formulario = document.createElement('form');
+
+        let labelNombre = document.createElement('label');
+        labelNombre.textContent = 'Nombre y Apellidos:';
+        formulario.appendChild(labelNombre);
+
+        let inputNombre = document.createElement('input');
+        inputNombre.type = 'text';
+        inputNombre.id = 'nyap';
+        inputNombre.name = 'nyap';
+        inputNombre.value = persona.nyap;
+        formulario.appendChild(inputNombre);
+
+        formulario.appendChild(document.createElement('br'));
+
+
+        let botonActualizar = document.createElement('button');
+        botonActualizar.type = 'submit';
+        botonActualizar.textContent = 'Actualizar';
+        formulario.appendChild(botonActualizar);
+
+        formulario.addEventListener('submit', (evento) => {
+            evento.preventDefault();
+
+            let datosActualizados = {
+                nyap: inputNombre.value
+            };
+
+            actualizarPersona(persona.dni, datosActualizados);
+        });
+
+        document.body.appendChild(formulario);
+    }
+    function actualizarPersona(dni, datosActualizados) {
+        const apiUrl = 'https://bbdd.lhdevsolutions.net:50500/api/personas';
+        console.log(JSON.stringify(datosActualizados));
+        fetch(`${apiUrl}/${dni}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosActualizados)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+
+//https://bbdd.lhdevsolutions.net:50500/swagger/index.html
+</script>
+
+<body>
+    <form id="formulario">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni"><br>
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    //direccion que indica el usuario y mueve la bola
+    let direccion;
+    //numero de obtaculos deseados
+    const NUMERO_OBSTACULOS = 5;
+    //constantes de las teclas de movimiento
+    const LEFT = 37;
+    const RIGHT = 39;
+    const UP = 38;
+    const DOWN = 40;
+    //
+    //variable utilizada para saber el punto donde se encuentra la bola roja
+    let bola = document.getElementById("divCirculo");
+    // variable que sirve para iniciar el timer al pulsar una tecla
+    let arrancado = false;
+    //id del intervale
+    let idIntervale;
+    //guardamos el ancho y el alto del contenedor
+    let anchodiv = window.innerWidth - 30;
+    let altodiv = window.innerHeight - 30;
+    // tiempo de inicio de la partida
+
+    //array que muestran las posiciones x e y de un circulo
+    let arrayposicionesX = [];
+    let arrayposicionesY = [];
+    //crea el div en el body
+    function crearDiv() {
+      let div = document.createElement("div");
+      div.setAttribute("Id", "contenedorDiv");
+      div.style.width = window.innerWidth - 30 + "px";
+      div.style.height = window.innerHeight - 30 + "px";
+      div.style.backgroundColor = "grey";
+      document.body.appendChild(div);
+    }
+    //funcion que crea numeros random para utilizarlo a la hora de posicionar los obstaculos y la bola roja
+    function posicion(minimo, maximo) {
+      return Math.random() * maximo - minimo + minimo;
+    }
+    //creacion del circulo
+    function crearCirculo() {
+      let circulo = document.createElement("div");
+      circulo.setAttribute("Id", "divCirculo");
+      document.getElementById("contenedorDiv").appendChild(circulo);
+      circulo.style.width = "30px";
+      circulo.style.height = "30px";
+      circulo.style.borderRadius = "50%";
+      circulo.style.backgroundColor = "red";
+      circulo.style.position = "absolute";
+      let widthCon = document.getElementById("contenedorDiv").clientWidth;
+      let heightCon = document.getElementById("contenedorDiv").clientHeight;
+      circulo.style.top = posicion(0, heightCon) + "px";
+      circulo.style.left = posicion(0, widthCon) + "px";
+    }
+    function crearObstaculos(index, posX, posY) {
+      let circulos = document.createElement("p");
+      circulos.setAttribute("Id", "obstaculos" + index);
+      document.getElementById("contenedorDiv").appendChild(circulos);
+      circulos.style.width = "10px";
+      circulos.style.height = "10px";
+      circulos.style.borderRadius = "50%";
+      circulos.style.backgroundColor = "black";
+      circulos.style.position = "absolute";
+      circulos.style.top = posY + "px";
+      circulos.style.left = posX + "px";
+      circulos.style.margin = "0";
+    }
+    // funcion que crea las posiciones de los obstaculos y las guarda en dos arrays uno correspondiente a la posicion x
+    // Y correspondiente a la posicion Y
+    function RellenarArrays(params) {
+      let widthCon = document.getElementById("contenedorDiv").clientWidth;
+      let heightCon = document.getElementById("contenedorDiv").clientHeight;
+      for (let index = 0; index < NUMERO_OBSTACULOS; index++) {
+        let posX = posicion(0, widthCon);
+        let posY = posicion(0, heightCon);
+
+        arrayposicionesX.push(posX.toFixed(0));
+        arrayposicionesY.push(posY.toFixed(0));
+      }
+    }
+    //funcion que posiciona los obtaculos dentro del div principal
+    function PosicionarObstaculos(params) {
+      for (let index = 0; index < 100; index++) {
+        crearObstaculos(
+          index,
+          arrayposicionesX[index],
+          arrayposicionesY[index]
+        );
+      }
+    }
+    // funcion que detecta al presionar el enter utilizando el codigo del la tecla
+    function leerTecla(valorLeidoTeclado) {
+      if (valorLeidoTeclado.keyCode == 13) {
+        alert("Boton enter presionado");
+      }
+    }
+    // Funcion que detecta la teclas de movimiento
+    function leerMovimiento(valorLeidoTeclado) {
+      if (
+        valorLeidoTeclado.keyCode == LEFT ||
+        valorLeidoTeclado.keyCode == RIGHT ||
+        valorLeidoTeclado.keyCode == UP ||
+        valorLeidoTeclado.keyCode == DOWN
+      ) {
+        direccion = valorLeidoTeclado.keyCode;
+        Movimiento();
+        //arraca el intervalo una vez
+        if (!arrancado) {
+          idIntervale = setInterval(() => {
+            Movimiento();
+            comprobarChoque();
+          }, 5);
+          arrancado = true;
+          t1 = new Date();
+        }
+      }
+    }
+    function partidaFinalizada() {
+      let t2 = new Date();
+      let segundos = Math.round((t2.getTime() - t1.getTime()) / 1000);
+      document.getElementById("contenedorDiv").remove();
+      let parrafo = document.createElement("p");
+      parrafo.innerText =
+        "La partida a finalizado con " + segundos + " segundos de duracion";
+      parrafo.style.fontSize = "25px";
+      parrafo.style.fontWeight = "bold";
+      parrafo.style.color = "red";
+      parrafo.style.textAlign = "center";
+      //document.getElementById("contenedorDiv").appendChild(parrafo);
+      document.body.appendChild(parrafo);
+    }
+    function Movimiento() {
+      //comprobar si nos salimos del limite de la pantalla
+      let posicionX = bola.offsetLeft + parseInt(bola.style.width);
+      let posicionY = bola.offsetHeight + parseInt(bola.style.height);
+      let anchobola = parseInt(bola.style.width);
+      let altobola = parseInt(bola.style.height);
+      if (
+        bola.offsetTop >= window.innerHeight - 75 ||
+        bola.offsetLeft >= window.innerWidth - 70 ||
+        bola.offsetTop < 10 ||
+        bola.offsetLeft < 25
+      ) {
+        //añadir directamente un texto html
+        partidaFinalizada();
+        // se para el setIntervale y ponemos la variable arrancado a false
+        arrancado = false;
+        clearInterval(idIntervale);
+      }
+      // si no, nos movemos en la direccion que indica el usuario
+      switch (direccion) {
+        case LEFT:
+          bola.style.left = bola.offsetLeft - 1 + "px";
+          break;
+        case RIGHT:
+          bola.style.left = bola.offsetLeft + 1 + "px";
+          break;
+        case UP:
+          bola.style.top = bola.offsetTop - 1 + "px";
+          break;
+        case DOWN:
+          bola.style.top = bola.offsetTop + 1 + "px";
+          break;
+        default:
+          break;
+      }
+    }
+    // funcion que comprueba que la bola no choque con ningun obstaculo
+    function comprobarChoque(params) {
+      //recorrer todos los puntos de la pantalla
+      for (let index = 0; index < arrayposicionesX.length; index++) {
+        const posX = arrayposicionesX[index];
+        const posY = arrayposicionesY[index];
+        if (
+          bola.offsetLeft < posX + 10 &&
+          bola.offsetLeft + bola.clientWidth > posX &&
+          bola.offsetTop < posY + 15 &&
+          bola.offsetTop + 25 > posY
+        ) {
+          partidaFinalizada();
+          clearInterval(idIntervale);
+        }
+      }
+    }
+    this.onload = () => {
+      //Crea el div que va a contener los obstaculos y el punto rojo
+      crearDiv();
+      //Crea el punto rojo
+      crearCirculo();
+      //Rellena los arrays que va a determinar la posicion de los obstaculos
+      RellenarArrays();
+      //creamor los circulos apartir de una etiqueta p y se le dan los estilos
+      crearObstaculos();
+      //Posiciona los obstaculos
+      PosicionarObstaculos();
+      //evento que detecta cuando se presiona el enter llamando a la funcion
+      document.addEventListener("keypress", leerTecla);
+      //evento que detecta cuando las flechas de direccion se pulsan
+      document.addEventListener("keydown", leerMovimiento);
+      //posicion de la bola
+      bola = document.getElementById("divCirculo");
+      console.log(bola.offsetTop);
+      console.log(bola.offsetLeft);
+      //posicionX + anchobola - 30 > anchodiv ||
+      //posicionX < 0 ||
+      //posicionY + altobola - 30 > altodiv ||
+      //posicionY < 0
+    };
+  </script>
+  <body></body>
+</html>

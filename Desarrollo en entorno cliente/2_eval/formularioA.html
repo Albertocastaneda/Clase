@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function mostrarGet() {
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var nombreParam = urlParams.get("nombre");
+      alert(nombreParam);
+      document.getElementById("boton").style.backgroundColor = "red";
+    }
+    function over(params) {
+      document.getElementById("boton").style.backgroundColor = "blue";
+    }
+    function onSubmit() {
+      document.forms[0][0]["value"] =
+        document.forms[0][0]["value"].toUpperCase();
+      document.forms[0][1]["value"] =
+        document.forms[0][1]["value"].toLowerCase();
+    }
+  </script>
+  <body>
+    <form action="formularioA.html" method="get" onsubmit="onSubmit()">
+      <label>Nombre</label>
+      <input type="text" name="nombre" /><br />
+      <label>Apellidos</label>
+      <input type="text" name="apellidos" /><br />
+      <input type="submit" value="submit" />
+    </form>
+    <button onclick="mostrarGet()" id="boton" onmouseover="over()">
+      Mostrar
+    </button>
+    <form action="formularioA.html" method="get">
+      <label>Nombre</label>
+      <input type="text" name="nombre" /><br />
+      <label>Apellidos</label>
+      <input type="text" name="apellidos" /><br />
+      <input type="submit" value="submit" />
+    </form>
+    <form action="formularioA.html" method="get">
+      <label>Nombre</label>
+      <input type="text" name="nombre" /><br />
+      <label>Apellidos</label>
+      <input type="text" name="apellidos" /><br />
+      <input type="submit" value="submit" />
+    </form>
+  </body>
+</html>

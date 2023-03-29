@@ -1,0 +1,342 @@
+<html>
+  <head>
+    <title>Conversiones</title>
+  </head>
+
+  <style>
+    .botonesGrandes {
+      border: none;
+      background-color: #e7e7e7;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .botonesPequeno {
+      background-color: #008cba; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    #zonaResultados {
+      border: solid 1px lightslategrey;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+
+    div {
+      text-align: center;
+    }
+  </style>
+
+  <body style="text-align: center; background-color: lightgray">
+    <h1>Conversiones</h1>
+
+    <div>
+      <button class="botonesGrandes" onclick="Invertir(invertido)">
+        Invertir Conversiones
+      </button>
+      <button class="botonesGrandes" onclick="UltimaOperacion()">
+        Última operación
+      </button>
+      <button class="botonesGrandes" onclick="Limpiar()">Limpiar</button>
+    </div>
+
+    <br /><br /><br />
+
+    <div>
+      <span>
+        <button
+          id="CelsiusAFar"
+          class="botonesPequeno"
+          onclick="RealizarOperacion(1)"
+        >
+          Celsius a Fahrenheit
+        </button>
+      </span>
+
+      <span>
+        <button
+          id="NudosKm"
+          class="botonesPequeno"
+          onclick="RealizarOperacion(2)"
+        >
+          Nudos a Km/h
+        </button>
+      </span>
+    </div>
+
+    <br /><br />
+
+    <div>
+      <span>
+        <button
+          id="EurosDolares"
+          class="botonesPequeno"
+          onclick="RealizarOperacion(3)"
+        >
+          Euros a Dolares
+        </button>
+      </span>
+
+      <!-- TODO: completar HTML -->
+      <span>
+        <button
+          id="YenesDolares"
+          class="botonesPequeno"
+          onclick="RealizarOperacion(4)"
+        >
+          Yenes a Dolares
+        </button>
+      </span>
+      <span>
+        <button class="botonesPequeno" disabled>Km a Millas</button>
+      </span>
+    </div>
+
+    <br /><br />
+
+    <div>
+      <span>
+        <button class="botonesPequeno" disabled>Km/h a Millas/Hora</button>
+      </span>
+    </div>
+
+    <br /><br />
+
+    <div id="zonaResultados">
+      <p id="resultado">Esperando la operación ...</p>
+    </div>
+  </body>
+
+  <script>
+    // ****************************** CONSTANTES ***********************************************//
+
+    // Tipos de operaciones y su viceversa, como operaciones generales.
+    const OPERACION_CELSIUS_FAR_Y_VIC = 1;
+    const OPERACION_NUDOS_KM_Y_VIC = 2;
+    const OPERACION_EUROS_DOLARES = 3;
+    // TODO: completar con el resto de operaciones
+    const OPERACION_YENES_DOLARES = 4;
+    // Subtipo de operaciones por cada operación
+    // Cº a Fº
+    const CELSIUS_FARENHET = 1;
+    // Fº a Cº
+    const FARENHET_CELSIUS = 2;
+    // Nudos a Km
+    const NUDOS_KM = 3;
+    // Km a Nudos
+    const KM_NUDOS = 4;
+    // Euros a Dolares
+    const EUROS_DOLARES = 5;
+    // Dolarea a Euros
+    const DOLARES_A_EUROS = 6;
+    // TODO: resto de subtipos de operaciones
+    const YENES_DOLARES = 7;
+    const DOLARES_YENES = 8;
+    // Textos descriptivos para cada operación
+    const CELSIUS_FARENHET_TXT = "Celsius a Farenheit";
+    const FARENHET_CELSIUS_TXT = "Farenheit a Celsius";
+
+    const NUDOS_KM_TXT = "Nudos a Km";
+    const KM_NUDOS_TXT = "Km a Nudos";
+
+    const DOLARES_EUROS_TXT = "Dólares a Euros";
+    const EUROS_DOLARES_TXT = "Euros a Dólares";
+    // TODO: resto de textos de las operaciones
+    const YENES_DOLARES_TXT = "Yenes a Dolares";
+    const DOLARES_YENES_TXT = "Dolares a Yenes";
+    // ******************************OBJETOS Y VARIABLES GLOBALES************************//
+
+    // Variable global que indica si estamos en una operación normal o es su inversa
+    let intertido = false;
+
+    // Objeto Conversiones
+    var Conversiones = {
+      ultimaOperacion: "",
+      numeroOperaciones: 0,
+      valorUltimaOperacion: 0,
+    };
+
+    // ****************************** FUNCIONES ****************************************//
+
+    /*
+     * Función que realiza una conversión en función del tipo de operación seleccionada
+     * TipoOperacion: 1 -> Cº a Fº y Fº a Cº
+     * TipoOperacion: 2 -> Nudos a Km y Km a Nudos
+     */
+    function RealizarOperacion(TipoOperacion) {
+      let operacion = TipoOperacion;
+      let txt;
+
+      let valorOperacion = prompt("Introduce el valor");
+
+      switch (TipoOperacion) {
+        case OPERACION_CELSIUS_FAR_Y_VIC:
+          operacion = !invertido ? CELSIUS_FARENHET : FARENHET_CELSIUS;
+          txt = !invertido ? CELSIUS_FARENHET_TXT : FARENHET_CELSIUS_TXT;
+          break;
+        case OPERACION_NUDOS_KM_Y_VIC:
+          operacion = !invertido ? NUDOS_KM : KM_NUDOS;
+          txt = invertido ? NUDOS_KM_TXT : KM_NUDOS_TXT;
+          break;
+        case OPERACION_EUROS_DOLARES:
+          operacion = !invertido ? EUROS_DOLARES : DOLARES_A_EUROS;
+          txt = invertido ? DOLARES_EUROS_TXT : EUROS_DOLARES_TXT;
+          break;
+        // TODO: resto de operaciones
+        case OPERACION_DOLARES_YENES:
+          operacion = !invertido ? YENES_DOLARES : DOLARES_YENES;
+          txt = invertido ? YENES_DOLARES_TXT : DOLARES_YENES_TXT;
+          break;
+        default:
+          break;
+      }
+
+      CalcularOperacion(operacion, valorOperacion);
+      ActualizaConversiones(txt, valorOperacion);
+      InformacionConsola(JSON.stringify(this.Conversiones), true);
+    }
+
+    /*
+     * Función que realiza el cálculo de la operación
+     * Tipo de operacion: es el tipo de operación
+     * valor: valor a convertir
+     * */
+    function CalcularOperacion(TipoOperacion, valor) {
+      let resultado;
+      switch (TipoOperacion) {
+        // Celsius a Fareheint
+        case CELSIUS_FARENHET:
+          resultado = (valor * 1.8 + 32).toFixed(2);
+          // Cambiamos los estilos de la zona de resultados en función del resultado
+          if (resultado > 40) {
+            AsignarEstilo("darkred", "lightcoral");
+          } else if (resultado < 5) {
+            AsignarEstilo("darkblue", "lightblue");
+          }
+          break;
+        // Fareheint a Celsius
+        case FARENHET_CELSIUS:
+          resultado = (((valor - 32) * 5) / 9).toFixed(2);
+          // Cambiamos los estilos de la zona de resultados en función del resultado
+          if (resultado > 40) {
+            AsignarEstilo("darkred", "lightcoral");
+          } else if (resultado < 5) {
+            AsignarEstilo("darkblue", "lightblue");
+          }
+          break;
+        // KM a Nudos
+        case KM_NUDOS:
+          resultado = (valor * 0.54).toFixed(2);
+          break;
+        // Nudos a Km
+        case NUDOS_KM:
+          resultado = (valor * 1.852).toFixed(2);
+          break;
+        // Euros a Colares
+        case EUROS_DOLARES:
+          resultado = (valor * 0.97).toFixed(2);
+          break;
+        // Dolares a euros
+        case DOLARES_A_EUROS:
+          resultado = (valor * 1.03).toFixed(2);
+          break;
+
+        // TODO: Resto de operaciones
+        case YENES_DOLARES:
+          resultado = (valor * 1.846).toFixed(2);
+          break;
+        case DOLARES_YENES:
+          resultado = (valor / 1.846).toFixed(2);
+          break;
+        default:
+          break;
+      }
+
+      EscribirEstado(resultado);
+    }
+
+    /*
+     * Función genérica que realizar el calculo de las operaciones necesarias
+     */
+    function ActualizaConversiones(ultOp, valorUltOp) {
+      this.Conversiones.ultimaOperacion = ultOp;
+      this.Conversiones.valorUltimaOperacion = valorUltOp;
+      this.Conversiones.numeroOperaciones++;
+    }
+
+    /*
+     * Función que saca por consola un texto en función de un tipo, error o log
+     */
+    function InformacionConsola(texto, tipo) {
+      !tipo ? console.log(texto) : console.error(texto);
+    }
+
+    /*
+     * Escribe en la zona de resultados el valor de la última operación
+     */
+    function UltimaOperacion() {
+      EscribirEstado(this.Conversiones.ultimaOperacion);
+    }
+
+    /*
+     * Escribe en la zona de resultados el texto que se le pasa como parámetro
+     */
+    function EscribirEstado(texto) {
+      document.getElementById("zonaResultados").innerHTML = texto;
+    }
+
+    /*
+     * Limpia el texto de la zona de resultados
+     */
+    function Limpiar() {
+      EscribirEstado("Esperando operación...");
+    }
+
+    /*
+     * Función que asina el estilo a la zona de resultados
+     * color: Color de la fuente
+     * background: Color del fondo
+     */
+    function AsignarEstilo(color, background) {
+      let dvGrados = document.getElementById("zonaResultados");
+      dvGrados.style.color = color;
+      dvGrados.style.backgroundColor = background;
+    }
+
+    /*
+     * Función que invierte el valor de la variable invertido y cambia
+     * todos los textos de los párrafos
+     */
+    function Invertir(valor) {
+      if (!valor) {
+        invertido = true;
+        document.getElementById("CelsiusAFar").innerHTML = CELSIUS_FARENHET_TXT;
+        document.getElementById("NudosKm").innerHTML = NUDOS_KM_TXT;
+        document.getElementById("EurosDolares").innerHTML = EUROS_DOLARES_TXT;
+        // TODO: Completar con el resto de textos de las operaciones
+        documet.getElementById("YenesDolares").innerHTML = YENES_DOLARES_TXT;
+      } else {
+        invertido = false;
+        document.getElementById("CelsiusAFar").innerHTML = FARENHET_CELSIUS_TXT;
+        document.getElementById("NudosKm").innerHTML = KM_NUDOS_TXT;
+        document.getElementById("EurosDolares").innerHTML = DOLARES_EUROS_TXT;
+        // TODO: Completar con el resto de textos de las operaciones
+        document.getElementById("YenesDolares").innerHTML = DOLARES_YENES_TXT;
+      }
+    }
+
+    // De inicio marcamos la variable global a false indicando que no estamos en operación inversa
+    Invertir(false);
+  </script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    // creacion del array
+    let arrayPersonas = new Array(10);
+    // creacion de la clase persona
+    class Persona {
+      edad;
+      constructor(edad) {
+        this.edad = Math.floor(Math.random() * 80); //asignacion del random del atributo
+      }
+    }
+    function Funcion1() {
+      //rellena las posiciones del array con el objeto persona
+      for (let index = 0; index < arrayPersonas.length; index++) {
+        let p = new Persona();
+        arrayPersonas[index] = p;
+      }
+      console.log("He pulsado el boton Uno"); //console log que e visualiza al hacer click en el boton
+      console.log(arrayPersonas);
+      // interval que cada segundo muestra un numero aleatorio
+      setInterval(() => {
+        document.getElementById("mensaje2").innerHTML = Math.floor(
+          Math.random() * 80
+        );
+      }, 1000);
+    }
+    function Funcion2() {
+      console.log("He pulsado el boton Dos"); // console log del eventListener
+    }
+    // evento onload
+    this.onload = () => {
+      console.log("Carga realizada correctamente");
+      // evento que al hacer click en el boton dos llama a la funcion y escribe el console log
+      document.getElementById("botonDos").addEventListener("click", () => {
+        Funcion2();
+      });
+    };
+  </script>
+  <body>
+    <button id="botonUno" onclick="Funcion1()">boton 1</button>
+    <button id="botonDos">boton 2</button>
+    <div id="mensaje1"></div>
+    <div id="mensaje2"></div>
+  </body>
+</html>

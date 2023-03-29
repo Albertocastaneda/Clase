@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script></script>
+  <body>
+    <form action="" name="cositas">
+      <input
+        type="button"
+        value="click aqui"
+        onclick="alert('hay ' + document.forms.length + ' formularios en esta pagina')"
+      />
+      <input
+        type="button"
+        value="click aqui nombre formulario"
+        onclick="alert('El nombre del primer formulario es: ' + document.forms[0].name)"
+      />
+      <input
+        type="button"
+        value="click aqui nombre formulario2"
+        onclick="alert('El nombre del primer formulario es: ' + document.forms[1].name)"
+      />
+    </form>
+    <form action="" name="cositas2"></form>
+  </body>
+</html>

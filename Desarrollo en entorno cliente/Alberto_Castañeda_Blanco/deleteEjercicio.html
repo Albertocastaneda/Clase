@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<script>
+    function listarPersonas() {
+        fetch('https://bbdd.lhdevsolutions.net:50500/api/personas')
+            .then(response => response.json())
+            .then(data => {
+                let lista = document.createElement('ul');
+                lista.setAttribute("class","list-group");
+                data.forEach(persona => {
+                    let item = document.createElement('li');
+                    item.setAttribute("class","list-group-item")
+                    item.textContent = `${persona.dni} - ${persona.nyap}`;
+                    lista.appendChild(item);
+                });
+                let formEliminar = document.createElement('form');
+                let labelDni = document.createElement("label");
+                labelDni.setAttribute("for","dni");
+                labelDni.setAttribute("class","form-label");
+                labelDni.textContent = "DNI:";
+
+                let inputDni = document.createElement('input');
+                inputDni.setAttribute('type', 'text');
+                inputDni.setAttribute('name', 'dni');
+                inputDni.setAttribute("class","form-control");
+
+                let botonEliminar = document.createElement('button');
+                botonEliminar.setAttribute("class","btn btn-primary");
+                botonEliminar.textContent = 'Eliminar Persona Por DNI';
+                
+                formEliminar.appendChild(labelDni);
+                formEliminar.appendChild(inputDni);
+                formEliminar.appendChild(botonEliminar);
+
+                let resultado = document.getElementById('resultado');
+                resultado.innerHTML = '';
+                resultado.appendChild(lista);
+                resultado.appendChild(formEliminar);
+
+                formEliminar.addEventListener('submit', event => {
+                    event.preventDefault();
+                    let dni = inputDni.value;
+                    let persona = data.find(p => p.dni === dni);
+                    if (persona) {
+                        eliminarPersona(persona.dni);
+                    } else {
+                        alert(`No se encontró ninguna persona con DNI ${dni}`);
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    function eliminarPersona(dni) {
+        fetch(`https://bbdd.lhdevsolutions.net:50500/api/personas/${dni}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                alert('Persona eliminada.');
+                listarPersonas();
+            })
+            .catch(error => console.error(error));
+    }
+    this.onload = () => {
+        let btnListarPersonas = document.querySelector('#botonListarPersonas');
+        btnListarPersonas.addEventListener('click', listarPersonas);
+    }
+</script>
+
+<body>
+    <button id="botonListarPersonas" class="btn btn-primary">Listar Personas</button><br><br>
+    <div class="container" id="resultado"></div>
+</body>
+
+</html>

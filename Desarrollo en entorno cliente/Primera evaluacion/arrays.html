@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      var dias = [
+        "lunes",
+        "martes",
+        "miercoles",
+        "jueves",
+        "viernes",
+        "sabado",
+        "domingo",
+      ];
+      console.log("dias: " + dias);
+      console.log("longitud dias: " + dias.length);
+
+      dias = dias.sort();
+      console.log(dias);
+
+      dias.push("juernes");
+      console.log("dias: " + dias);
+
+      var ultimo = dias.pop();
+      console.log("ultimo: " + ultimo);
+      console.log("dias: " + dias);
+
+      var dia = dias.shift();
+      console.log("dia: " + dia);
+      console.log("dias: " + dias);
+
+      delete dias[3];
+      console.log("dias: " + dias);
+
+      var dias2 = [
+        ["lunes", "martes", "miercoles", "jueves", "viernes"],
+        ["sabado", "domingo"],
+      ];
+      console.log(dias2);
+      console.log(dias2[0][2]);
+
+      //for (let index = 0; index < dias.length; index++) {
+      //const element = dias[index];
+      //console.log(element);
+      //}
+
+      dias.forEach((element) => {
+        console.log(element);
+      });
+      let arraynumeros = [];
+      for (let index = 0; index < 20; index++) {
+        let aleatorio = Math.round(Math.random() * 20);
+        arraynumeros.push(aleatorio);
+      }
+      console.log(arraynumeros);
+      var max = Math.max(...arraynumeros);
+      var min = Math.min(...arraynumeros);
+      console.log(max);
+      console.log(min);
+      //coges el indece del array donde se encuentra el mayor y el menor
+      console.log(arraynumeros.indexOf(Math.max(...arraynumeros)));
+      console.log(arraynumeros.indexOf(Math.min(...arraynumeros)));
+
+      //delete arraynumeros[arraynumeros.indexOf(Math.max(...arraynumeros))];
+      //delete arraynumeros[arraynumeros.indexOf(Math.min(...arraynumeros))];
+
+      arraynumeros.splice(arraynumeros.indexOf(Math.max(...arraynumeros)), 1);
+      arraynumeros.splice(arraynumeros.indexOf(Math.min(...arraynumeros)), 1);
+      console.log(arraynumeros);
+
+      console.log("Array ordenado: " + arraynumeros.sort((a, b) => b - a));
+
+      var usuario = { nombre: "Pepe", apellidos: "Perez", edad: 45 };
+      for (const key in usuario) {
+        console.log(key + " " + usuario[key]);
+      }
+      function coche(modelo, color, kilometros) {
+        this.modelo = modelo;
+        this.color = color;
+        this.kilometros = kilometros;
+      }
+
+      var miCoche = new coche("Audi a4", "Negro", 25000);
+      var tuCoche = new coche("VW california", "Blanco", 23000);
+
+      console.log("MiCoche " + JSON.stringify(miCoche));
+      console.log("TuCoche " + JSON.stringify(tuCoche));
+
+      var miVW = tuCoche;
+
+      console.log("miVW " + JSON.stringify(miVW));
+      miVW.color = "amarillo";
+
+      console.log("miVW " + JSON.stringify(miVW));
+      console.log("TuCoche " + JSON.stringify(tuCoche));
+
+      class Persona {
+        edad;
+        peso;
+        constructor() {
+          this.edad = parseInt(Math.random() * 80);
+          this.peso = parseInt(Math.random() * 100);
+          Object.freeze(this);
+        }
+      }
+      let persona = new Persona();
+      console.log("Persona " + persona);
+      console.log("Persona" + JSON.stringify(persona));
+
+      let arrayPersonas = new Array();
+      numPersonas = 10;
+      for (let index = 0; index < numPersonas; index++) {
+        let persona = new Persona();
+        persona.peso = "55";
+        arrayPersonas.push(persona);
+        console.log(JSON.stringify(persona));
+      }
+      let personas = 20;
+      let arrayMenores25 = new Array();
+      function personasMayoresMenores(personas) {
+        for (let index = 0; index < personas; index++) {
+          let persona = new Persona();
+          if (persona.edad < 25) {
+            arrayMenores25.push(persona);
+            console.log("Menores 25: " + JSON.stringify(persona));
+          }
+        }
+      }
+      personasMayoresMenores();
+    };
+  </script>
+  <body></body>
+</html>

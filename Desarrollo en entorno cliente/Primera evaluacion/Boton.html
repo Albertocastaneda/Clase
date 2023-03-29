@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    this.onload = () => {
+      document
+        .getElementById("tamaño")
+        .addEventListener("click", () => tamañoConToolbar());
+      document
+        .getElementById("tamaño2")
+        .addEventListener("click", () => tamañoSinTool());
+      let ventana;
+      document.getElementById("Ventana").addEventListener("click", () => {
+        ventana = window.open("", "", "width = 100, height = 100");
+        // ventana.resizeTo(500, 500);
+      });
+      document.getElementById("ventana2").addEventListener("click", () => {
+        ventana.resizeTo(500, 500);
+      });
+      document
+        .getElementById("fecha")
+        .addEventListener("click", () => formato());
+    };
+    function tamañoSinTool() {
+      let ancho = window.innerHeight;
+      let alto = window.innerWidth;
+      alert("anchoTool " + ancho + " altoTool " + alto);
+    }
+    function tamañoConToolbar() {
+      let ancho = window.outerWidth;
+      let alto = window.outerHeight;
+      alert("ancho " + ancho + " alto " + alto);
+    }
+    let Fecha = new Date();
+    function formato() {
+      let dia = dia(Fecha.getDay());
+      let mes = mes(Fecha.getMonth() + 1);
+      alert(
+        "Hoy es " +
+          dia +
+          ", " +
+          Fecha.getDate +
+          " de " +
+          mes +
+          " de " +
+          Fecha.getFullYear() +
+          " y son las " +
+          Fecha.getHours() +
+          ":" +
+          Fecha.getMinutes() +
+          ":" +
+          Fecha.getSeconds() +
+          " horas"
+      );
+    }
+    function dia(dia) {
+      switch (dia) {
+        case 0:
+          dia = "Domingo";
+          break;
+        case 1:
+          dia = "Lunes";
+          break;
+        case 2:
+          dia = "Martes";
+          break;
+        case 3:
+          dia = "Miercoles";
+          break;
+        case 4:
+          dia = "Jueves";
+          break;
+        case 5:
+          dia = "Viernes";
+          break;
+        case 6:
+          dia = "Sabado";
+          break;
+        default:
+          break;
+      }
+    }
+    function mes(mes) {
+      switch (dia) {
+        case 1:
+          mes = "Enero";
+          break;
+        case 2:
+          mes = "Febrero";
+          break;
+        case 3:
+          mes = "Marzo";
+          break;
+        case 4:
+          mes = "Abril";
+          break;
+        case 5:
+          mes = "Mayo";
+          break;
+        case 6:
+          mes = "Junio";
+          break;
+        case 7:
+          mes = "Julio";
+          break;
+        case 8:
+          mes = "Agosto";
+          break;
+        case 9:
+          mes = "Septiembre";
+          break;
+        case 10:
+          mes = "Octubre";
+          break;
+        case 11:
+          mes = "Noviembre";
+          break;
+        case 12:
+          mes = "Diciembre";
+          break;
+        default:
+          break;
+      }
+    }
+  </script>
+  <body>
+    <button id="tamaño">click</button>
+    <button id="tamaño2">click</button>
+    <button id="Ventana">ventana</button>
+    <button id="ventana2">ventana2</button>
+    <button id="fecha">Fecha</button>
+  </body>
+</html>
