@@ -1,0 +1,39 @@
+body {
+  background-image: url("ForndoForm.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+#divWelcome {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+}
+p {
+  color: white;
+  font-size: xx-large;
+}
+ul {
+  color: white;
+  font-size: larger;
+}
+li {
+  list-style: none;
+  color: white;
+  font-size: larger;
+}
+fieldset {
+  width: 350px;
+  height: 550px;
+  margin: auto;
+  border-style: double;
+  border-width: 5px;
+}
+legend {
+  color: white;
+  font-size: x-large;
+}
+img {
+  width: 350px;
+  height: 300px;
+}

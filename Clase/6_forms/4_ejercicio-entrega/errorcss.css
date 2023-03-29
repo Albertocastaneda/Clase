@@ -1,0 +1,16 @@
+#Caja {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+  width: 200;
+  height: 200;
+}
+p {
+  color: red;
+}
+img {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}

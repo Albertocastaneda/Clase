@@ -1,0 +1,44 @@
+#cuerpoForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+body {
+  background-image: url("ForndoForm.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+fieldset {
+  border-style: double;
+  border-width: 5px;
+}
+legend {
+  color: white;
+}
+p {
+  color: white;
+}
+label {
+  color: white;
+}
+form {
+  margin: auto;
+  padding: 20px 20px 20px 20px;
+  width: 250px;
+  height: 400px;
+}
+.boton {
+  border-radius: 15px;
+  border-color: white;
+  width: 100px;
+  box-shadow: 0 5px rgb(39, 37, 37);
+}
+.boton:hover {
+  background-color: rgba(140, 164, 180);
+}
+.boton:active {
+  background-color: rgba(140, 164, 180);
+  box-shadow: 0 5px rgb(39, 37, 37);
+  transform: translateY(4px);
+}

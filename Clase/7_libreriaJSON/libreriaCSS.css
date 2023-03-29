@@ -1,0 +1,66 @@
+.contenedor {
+  --angle: 0deg;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid;
+  border-radius: 10px;
+  width: 80%;
+  min-height: 300px;
+  margin: auto;
+  gap: 5px;
+  padding: 8px;
+  border-image: linear-gradient(var(--angle), #12c2e9, #c471ed, #f64f59) 1;
+  animation: 5s rotate linear infinite;
+}
+.juego {
+  --angle: 0deg;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 3px solid;
+  padding: 8px;
+  border-image: linear-gradient(var(--angle), #f7de55, #7f26ac, #f8434f) 1;
+  animation: 5s rotate linear infinite;
+}
+.id {
+  font-size: 20px;
+  font-weight: 700;
+}
+.tittle {
+  font-size: 20px;
+  font-weight: 700;
+}
+.year {
+  font-size: 20px;
+  font-weight: 700;
+}
+.formulario {
+  --angle: 0deg;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  padding: 12px;
+  border: 2px solid;
+  border-radius: 10px;
+  border-image: linear-gradient(var(--angle), #f7de55, #7f26ac, #f8434f) 1;
+  animation: 5s rotate linear infinite;
+}
+.formulario form {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+}
+.formulario form * {
+  width: 100%;
+}
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

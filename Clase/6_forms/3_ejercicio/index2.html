@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="post.php" method="post">
+        <label for="Nombre">Nombre</label><br />
+        <input type="text" id="Nombre" name="Nombre"  placeholder="Nombre"/><br />
+  
+        <label for="Apellidos">Apellidos</label><br />
+        <input type="text" id="Apellidos" name="Apellidos" placeholder="Apellidos"/><br />
+  
+        <label for="Email">Email</label><br />
+        <input type="email" id="Email" name="Email" placeholder="Email"/><br>
+  
+        <label for="Contraseña">Contraseña</label><br />
+        <input type="password" id="Contraseña" name="Contraseña" placeholder="Contraseña"/><br>
+
+        <p>Seleccione un departamento</p>
+        
+        <input type="radio" id="Dep1" name="Departamentos" value="Departamento1">
+        <label for="Dep1">Departamento1</label><br>
+        <input type="radio" id="Dep2" name="Departamentos" value="Departamento2">
+        <label for="Dep2">Departamento2</label><br>
+        <input type="radio" id="Dep3" name="Departamentos" value="Departamento3">
+        <label for="Dep3">Departamento3</label><br><br>
+        <label for="Clientes">Seleccione tipo de cliente</label><br><br>
+        <select name="Clientes" id="Tipo">
+            <option value="Estandar">Estandar</option>
+            <option value="Premium">Premium</option>
+            <option value="VIP">VIP</option>
+        </select><br>
+
+        <p>Comentario</p>
+
+        <label for="comentarios"></label>
+        <textarea id="comentarios" name="texto" cols="30" rows="5"></textarea><br>
+
+        <input type="checkbox" id="condiciones" name="condiciones" value="aceptar">
+        <label for="condiciones">aceptar condiciones</label><br><br>
+
+        <input type="submit" value="Enviar"></input>
+      </form>
+</body>
+</html>
